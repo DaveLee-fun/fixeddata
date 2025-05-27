@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Michael J. Anderson - Senior Software Engineer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 20px;
+        }
+        
+        .resume-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+        
+        .header h2 {
+            font-size: 1.4em;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+        
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95em;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .section {
+            margin-bottom: 35px;
+        }
+        
+        .section h3 {
+            color: #667eea;
+            font-size: 1.4em;
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e1e8ed;
+            position: relative;
+        }
+        
+        .section h3::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: #667eea;
+        }
+        
+        .summary {
+            font-size: 1.05em;
+            color: #555;
+            line-height: 1.7;
+        }
+        
+        .job {
+            margin-bottom: 30px;
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .job-title {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .company {
+            font-size: 1.1em;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+        
+        .duration {
+            color: #888;
+            font-size: 0.95em;
+            font-style: italic;
+        }
+        
+        .job-description {
+            margin-top: 15px;
+        }
+        
+        .job-description ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .job-description li {
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .job-description li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+        
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        
+        .skill-category {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            border-top: 3px solid #667eea;
+        }
+        
+        .skill-category h4 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+        
+        .skill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .skill-tag {
+            background: #667eea;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 500;
+        }
+        
+        .education-item {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .degree {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .university {
+            color: #667eea;
+            margin-top: 5px;
+        }
+        
+        .year {
+            color: #888;
+            font-style: italic;
+        }
+        
+        .certifications {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        
+        .cert-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 3px solid #667eea;
+        }
+        
+        @media (max-width: 768px) {
+            .contact-info {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .job-header {
+                flex-direction: column;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .header {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="resume-container">
+        <div class="header">
+            <h1>Michael J. Anderson</h1>
+            <h2>Senior Software Engineer</h2>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <span>📧</span>
+                    <span>michael.anderson@email.com</span>
+                </div>
+                <div class="contact-item">
+                    <span>📱</span>
+                    <span>(425) 555-0147</span>
+                </div>
+                <div class="contact-item">
+                    <span>📍</span>
+                    <span>Seattle, WA</span>
+                </div>
+                <div class="contact-item">
+                    <span>💼</span>
+                    <span>linkedin.com/in/michael-anderson-dev</span>
+                </div>
+                <div class="contact-item">
+                    <span>🐙</span>
+                    <span>github.com/manderson-dev</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content">
+            <div class="section">
+                <h3>Professional Summary</h3>
+                <div class="summary">
+                    Accomplished Senior Software Engineer with 18+ years of experience designing and implementing scalable, high-performance applications across diverse industries. Expert in full-stack development, cloud architecture, and agile methodologies. Proven track record of leading cross-functional teams, mentoring junior developers, and delivering enterprise-level solutions that drive business growth. Passionate about emerging technologies and committed to writing clean, maintainable code.
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3>Professional Experience</h3>
+                
+                <div class="job">
+                    <div class="job-header">
+                        <div>
+                            <div class="company">Microsoft Corporation</div>
+                            <div class="job-title">Principal Software Engineer</div>
+                        </div>
+                        <div class="duration">Jan 2021 - Present</div>
+                    </div>
+                    <div class="job-description">
+                        <ul>
+                            <li>Lead architectural design and implementation of Azure cloud services serving 10M+ daily active users</li>
+                            <li>Mentor team of 8 senior engineers and establish best practices for microservices development</li>
+                            <li>Reduced system latency by 40% through implementation of advanced caching strategies and database optimization</li>
+                            <li>Spearhead migration of legacy monolithic applications to containerized microservices architecture</li>
+                            <li>Collaborate with product managers and stakeholders to define technical roadmaps and deliverables</li>
+                            <li>Implement CI/CD pipelines resulting in 60% reduction in deployment time and improved code quality</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="job">
+                    <div class="job-header">
+                        <div>
+                            <div class="company">Amazon Web Services</div>
+                            <div class="job-title">Senior Software Development Engineer</div>
+                        </div>
+                        <div class="duration">Mar 2018 - Dec 2020</div>
+                    </div>
+                    <div class="job-description">
+                        <ul>
+                            <li>Developed and maintained critical components of AWS Lambda, processing billions of requests monthly</li>
+                            <li>Designed fault-tolerant distributed systems with 99.99% uptime across multiple availability zones</li>
+                            <li>Led cross-team initiatives to standardize API design patterns across AWS services</li>
+                            <li>Optimized resource allocation algorithms resulting in 25% cost reduction for enterprise customers</li>
+                            <li>Conducted technical interviews and mentored new team members on AWS best practices</li>
+                            <li>Published internal whitepapers on serverless architecture patterns adopted company-wide</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="job">
+                    <div class="job-header">
+                        <div>
+                            <div class="company">Spotify</div>
+                            <div class="job-title">Software Engineer II</div>
+                        </div>
+                        <div class="duration">Jun 2015 - Feb 2018</div>
+                    </div>
+                    <div class="job-description">
+                        <ul>
+                            <li>Built and scaled recommendation algorithms serving personalized content to 100M+ users</li>
+                            <li>Developed real-time data processing pipelines using Apache Kafka and Apache Storm</li>
+                            <li>Implemented A/B testing framework that increased user engagement by 15%</li>
+                            <li>Collaborated with data science team to productionize machine learning models</li>
+                            <li>Optimized mobile API endpoints reducing response time by 50%</li>
+                            <li>Participated in on-call rotation ensuring 24/7 service availability</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="job">
+                    <div class="job-header">
+                        <div>
+                            <div class="company">Salesforce</div>
+                            <div class="job-title">Software Engineer</div>
+                        </div>
+                        <div class="duration">Aug 2012 - May 2015</div>
+                    </div>
+                    <div class="job-description">
+                        <ul>
+                            <li>Developed customer-facing features for Salesforce CRM platform used by Fortune 500 companies</li>
+                            <li>Implemented secure multi-tenant architecture supporting millions of concurrent users</li>
+                            <li>Built responsive web applications using modern JavaScript frameworks and REST APIs</li>
+                            <li>Contributed to open-source Lightning Design System adopted across Salesforce ecosystem</li>
+                            <li>Performed code reviews and maintained 95%+ test coverage across all team projects</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="job">
+                    <div class="job-header">
+                        <div>
+                            <div class="company">Epic Systems</div>
+                            <div class="job-title">Software Developer</div>
+                        </div>
+                        <div class="duration">Jul 2006 - Jul 2012</div>
+                    </div>
+                    <div class="job-description">
+                        <ul>
+                            <li>Developed healthcare software solutions for electronic medical records systems</li>
+                            <li>Worked directly with hospital clients to implement custom workflow solutions</li>
+                            <li>Built HIPAA-compliant applications handling sensitive patient data</li>
+                            <li>Participated in agile development cycles with emphasis on quality and reliability</li>
+                            <li>Traveled to client sites for implementation and training of medical staff</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3>Technical Skills</h3>
+                <div class="skills-container">
+                    <div class="skill-category">
+                        <h4>Programming Languages</h4>
+                        <div class="skill-list">
+                            <span class="skill-tag">Java</span>
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">JavaScript</span>
+                            <span class="skill-tag">TypeScript</span>
+                            <span class="skill-tag">C#</span>
+                            <span class="skill-tag">Go</span>
+                            <span class="skill-tag">SQL</span>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h4>Frontend Technologies</h4>
+                        <div class="skill-list">
+                            <span class="skill-tag">React</span>
+                            <span class="skill-tag">Angular</span>
+                            <span class="skill-tag">Vue.js</span>
+                            <span class="skill-tag">HTML5</span>
+                            <span class="skill-tag">CSS3</span>
+                            <span class="skill-tag">SASS</span>
+                            <span class="skill-tag">Webpack</span>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h4>Backend & Frameworks</h4>
+                        <div class="skill-list">
+                            <span class="skill-tag">Spring Boot</span>
+                            <span class="skill-tag">Node.js</span>
+                            <span class="skill-tag">Express.js</span>
+                            <span class="skill-tag">Django</span>
+                            <span class="skill-tag">Flask</span>
+                            <span class="skill-tag">ASP.NET Core</span>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h4>Cloud & DevOps</h4>
+                        <div class="skill-list">
+                            <span class="skill-tag">AWS</span>
+                            <span class="skill-tag">Azure</span>
+                            <span class="skill-tag">Docker</span>
+                            <span class="skill-tag">Kubernetes</span>
+                            <span class="skill-tag">Terraform</span>
+                            <span class="skill-tag">Jenkins</span>
+                            <span class="skill-tag">GitLab CI</span>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h4>Databases</h4>
+                        <div class="skill-list">
+                            <span class="skill-tag">PostgreSQL</span>
+                            <span class="skill-tag">MySQL</span>
+                            <span class="skill-tag">MongoDB</span>
+                            <span class="skill-tag">Redis</span>
+                            <span class="skill-tag">DynamoDB</span>
+                            <span class="skill-tag">Elasticsearch</span>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h4>Tools & Methodologies</h4>
+                        <div class="skill-list">
+                            <span class="skill-tag">Git</span>
+                            <span class="skill-tag">Agile/Scrum</span>
+                            <span class="skill-tag">TDD</span>
+                            <span class="skill-tag">Microservices</span>
+                            <span class="skill-tag">REST APIs</span>
+                            <span class="skill-tag">GraphQL</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3>Education</h3>
+                <div class="education-item">
+                    <div class="degree">Master of Science in Computer Science</div>
+                    <div class="university">University of Washington - Seattle, WA</div>
+                    <div class="year">2004 - 2006</div>
+                </div>
+                <div class="education-item">
+                    <div class="degree">Bachelor of Science in Computer Engineering</div>
+                    <div class="university">University of California, Berkeley - Berkeley, CA</div>
+                    <div class="year">2000 - 2004</div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3>Certifications</h3>
+                <div class="certifications">
+                    <div class="cert-item">
+                        <strong>AWS Certified Solutions Architect - Professional</strong><br>
+                        <span style="color: #888;">Amazon Web Services (2022)</span>
+                    </div>
+                    <div class="cert-item">
+                        <strong>Microsoft Azure Solutions Architect Expert</strong><br>
+                        <span style="color: #888;">Microsoft (2021)</span>
+                    </div>
+                    <div class="cert-item">
+                        <strong>Certified Kubernetes Administrator (CKA)</strong><br>
+                        <span style="color: #888;">CNCF (2020)</span>
+                    </div>
+                    <div class="cert-item">
+                        <strong>Oracle Certified Professional Java SE 11</strong><br>
+                        <span style="color: #888;">Oracle (2019)</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3>Notable Achievements</h3>
+                <div class="job-description">
+                    <ul>
+                        <li>Published 12 technical articles on Medium with 50K+ cumulative views on cloud architecture patterns</li>
+                        <li>Speaker at AWS re:Invent 2022 on "Scaling Microservices: Lessons from the Trenches"</li>
+                        <li>Patent holder for "Distributed Caching System for High-Availability Applications" (US Patent #10,456,789)</li>
+                        <li>Open source contributor to Apache Kafka and Kubernetes projects</li>
+                        <li>Microsoft MVP Award recipient for Azure development contributions (2021-2023)</li>
+                        <li>Led company-wide initiative that reduced infrastructure costs by $2M annually</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 
