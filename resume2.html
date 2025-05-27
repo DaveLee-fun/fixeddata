@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sarah M. Johnson - Digital Marketing Manager</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 50%, #fd79a8 100%);
+            padding: 20px;
+        }
+        
+        .resume-container {
+            max-width: 950px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);
+            color: white;
+            padding: 50px 40px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+        
+        .header h2 {
+            font-size: 1.5em;
+            opacity: 0.95;
+            font-weight: 400;
+            margin-bottom: 30px;
+        }
+        
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-size: 1em;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 12px 20px;
+            border-radius: 25px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .content {
+            padding: 50px 40px;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+        }
+        
+        .section h3 {
+            color: #6c5ce7;
+            font-size: 1.6em;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #e1e8ed;
+            position: relative;
+            font-weight: 600;
+        }
+        
+        .section h3::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);
+            border-radius: 2px;
+        }
+        
+        .summary {
+            font-size: 1.1em;
+            color: #555;
+            line-height: 1.8;
+            background: #f8f9fd;
+            padding: 30px;
+            border-radius: 15px;
+            border-left: 5px solid #6c5ce7;
+        }
+        
+        .job {
+            margin-bottom: 35px;
+            padding: 30px;
+            background: linear-gradient(135deg, #f8f9fd 0%, #fdfdff 100%);
+            border-radius: 15px;
+            border: 2px solid #e1e8ed;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .job:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(108, 92, 231, 0.1);
+            border-color: #a29bfe;
+        }
+        
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .job-title {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        
+        .company {
+            font-size: 1.2em;
+            color: #6c5ce7;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .duration {
+            color: #74b9ff;
+            font-size: 1em;
+            font-weight: 500;
+            background: #e3f2fd;
+            padding: 8px 15px;
+            border-radius: 20px;
+        }
+        
+        .job-description {
+            margin-top: 20px;
+        }
+        
+        .job-description ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .job-description li {
+            margin-bottom: 12px;
+            padding-left: 25px;
+            position: relative;
+            line-height: 1.6;
+        }
+        
+        .job-description li::before {
+            content: '✦';
+            position: absolute;
+            left: 0;
+            color: #6c5ce7;
+            font-size: 1.2em;
+            top: 2px;
+        }
+        
+        .metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .metric-item {
+            background: #e8f4fd;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            border: 2px solid #74b9ff;
+        }
+        
+        .metric-number {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #0984e3;
+        }
+        
+        .metric-label {
+            font-size: 0.9em;
+            color: #636e72;
+            margin-top: 5px;
+        }
+        
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+        
+        .skill-category {
+            background: linear-gradient(135deg, #f8f9fd 0%, #fdfdff 100%);
+            padding: 25px;
+            border-radius: 15px;
+            border-top: 4px solid #6c5ce7;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .skill-category h4 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.2em;
+            font-weight: 600;
+        }
+        
+        .skill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .skill-tag {
+            background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-size: 0.9em;
+            font-weight: 500;
+            transition: transform 0.2s ease;
+        }
+        
+        .skill-tag:hover {
+            transform: scale(1.05);
+        }
+        
+        .education-item {
+            background: linear-gradient(135deg, #ffeaa7 20%, #fab1a0 100%);
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+        
+        .degree {
+            font-size: 1.2em;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        
+        .university {
+            font-size: 1.1em;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .year {
+            font-style: italic;
+            opacity: 0.8;
+        }
+        
+        .certifications {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        
+        .cert-item {
+            background: linear-gradient(135deg, #fd79a8 0%, #fdcb6e 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(253, 121, 168, 0.3);
+        }
+        
+        .cert-title {
+            font-weight: 700;
+            font-size: 1.1em;
+            margin-bottom: 8px;
+        }
+        
+        .cert-issuer {
+            opacity: 0.9;
+            font-size: 0.95em;
+        }
+        
+        .achievements {
+            background: linear-gradient(135deg, #55efc4 0%, #00b894 100%);
+            padding: 30px;
+            border-radius: 15px;
+            color: white;
+        }
+        
+        .achievements h3 {
+            color: white !important;
+            border-bottom-color: rgba(255, 255, 255, 0.3) !important;
+        }
+        
+        .achievements h3::after {
+            background: white !important;
+        }
+        
+        .achievements ul li::before {
+            content: '★';
+            color: #fdcb6e;
+        }
+        
+        @media (max-width: 768px) {
+            .contact-info {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .job-header {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .content {
+                padding: 30px 20px;
+            }
+            
+            .header {
+                padding: 40px 20px;
+            }
+            
+            .header h1 {
+                font-size: 2.2em;
+            }
+            
+            .metrics {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="resume-container">
+        <div class="header">
+            <div class="header-content">
+                <h1>Sarah M. Johnson</h1>
+                <h2>Digital Marketing Manager</h2>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <span>📧</span>
+                        <span>sarah.johnson@email.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <span>📱</span>
+                        <span>(312) 555-0198</span>
+                    </div>
+                    <div class="contact-item">
+                        <span>📍</span>
+                        <span>Chicago, IL</span>
+                    </div>
+                    <div class="contact-item">
+                        <span>💼</span>
+                        <span>linkedin.com/in/sarah-johnson-marketing</span>
+                    </div>
+                    <div class="contact-item">
+                        <span>🌐</span>
+                        <span>sarahmarketingpro.com</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content">
+            <div class="section">
+                <h3>Professional Summary</h3>
+                <div class="summary">
+                    Dynamic Digital Marketing Manager with 8+ years of experience driving growth for B2B and B2C brands through data-driven marketing strategies. Expert in performance marketing, content strategy, and marketing automation. Proven track record of increasing lead generation by 300%+ and improving ROI across multi-channel campaigns. Passionate about leveraging emerging technologies and consumer insights to create compelling brand experiences that drive measurable business results.
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3>Professional Experience</h3>
+                
+                <div class="job">
+                    <div class="job-header">
+                        <div>
+                            <div class="company">HubSpot</div>
+                            <div class="job-title">Senior Digital Marketing Manager</div>
+                        </div>
+                        <div class="duration">Mar 2022 - Present</div>
+                    </div>
+                    <div class="job-description">
+                        <ul>
+                            <li>Lead integrated marketing campaigns for HubSpot's CRM platform, driving $15M+ in annual recurring revenue</li>
+                            <li>Manage marketing budget of $2.5M across paid media, content production, and marketing technology stack</li>
+                            <li>Developed and executed account-based marketing strategy targeting Fortune 500 companies, resulting in 45% increase in enterprise deals</li>
+                            <li>Built and optimized marketing automation workflows that improved lead nurturing efficiency by 60%</li>
+                            <li>Collaborate with sales team to create targeted content that shortened sales cycle by 25%</li>
+                            <li>Mentor team of 4 junior marketers and establish best practices for campaign performance measurement</li>
+                        </ul>
+                        <div class="metrics">
+                            <div class="metric-item">
+                                <div class="metric-number">320%</div>
+                                <div class="metric-label">Lead Growth</div>
+                            </div>
+                            <div class="metric-item">
+                                <div class="metric-number">$15M+</div>
+                                <div class="metric-label">Revenue Driven</div>
+                            </div>
+                            <div class="metric-item">
+                                <div class="metric-number">4.2x</div>
+                                <div class="metric-label">ROAS Improvement</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="job">
+                    <div class="job-header">
+                        <div>
+                            <div class="company">Salesforce</div>
+                            <div class="job-title">Digital Marketing Specialist</div>
+                        </div>
+                        <div class="duration">Aug 2020 - Feb 2022</div>
+                    </div>
+                    <div class="job-description">
+                        <ul>
+                            <li>Executed multi-channel demand generation campaigns for Salesforce Marketing Cloud, generating 2,500+ qualified leads monthly</li>
+                            <li>Managed paid advertising across Google Ads, LinkedIn, and Facebook with monthly budget of $500K</li>
+                            <li>Optimized landing pages and conversion funnels, improving conversion rates by 85%</li>
+                            <li>Created comprehensive attribution model tracking customer journey across 12+ touchpoints</li>
+                            <li>Developed content marketing strategy that increased organic traffic by 150% year-over-year</li>
+                            <li>Implemented marketing automation using Pardot, reducing manual lead qualification time by 70%</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="job">
+                    <div class="job-header">
+                        <div>
+                            <div class="company">Mailchimp</div>
+                            <div class="job-title">Growth Marketing Manager</div>
+                        </div>
+                        <div class="duration">Jan 2019 - Jul 2020</div>
+                    </div>
+                    <div class="job-description">
+                        <ul>
+                            <li>Led user acquisition initiatives for small business segment, acquiring 50K+ new customers</li>
+                            <li>Designed and executed email marketing campaigns with average open rates of 35% and CTR of 8%</li>
+                            <li>Launched influencer marketing program that generated 2M+ impressions and 15% brand lift</li>
+                            <li>Conducted A/B testing on product onboarding flows, increasing activation rates by 40%</li>
+                            <li>Analyzed customer cohorts and lifetime value to optimize marketing spend allocation</li>
+                            <li>Collaborated with product team to implement growth features that improved user retention by 30%</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="job">
+                    <div class="job-header">
+                        <div>
+                            <div class="company">Buffer</div>
+                            <div class="job-title">Social Media Marketing Manager</div>
+                        </div>
+                        <div class="duration">Jun 2017 - Dec 2018</div>
+                    </div>
+                    <div class="job-description">
+                        <ul>
+                            <li>Managed social media strategy across 8 platforms, growing combined following from 500K to 1.2M</li>
+                            <li>Created content calendar and managed team of 3 content creators and 2 community managers</li>
+                            <li>Launched viral social media campaigns that generated 5M+ impressions and 25K+ shares</li>
+                            <li>Implemented social listening strategy using Sprout Social and Brandwatch</li>
+                            <li>Developed influencer partnership program resulting in 200+ brand collaborations</li>
+                            <li>Analyzed social media metrics and provided weekly performance reports to executive team</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="job">
+                    <div class="job-header">
+                        <div>
+                            <div class="company">Shopify</div>
+                            <div class="job-title">Digital Marketing Coordinator</div>
+                        </div>
+                        <div class="duration">Mar 2016 - May 2017</div>
+                    </div>
+                    <div class="job-description">
+                        <ul>
+                            <li>Supported marketing campaigns for Shopify Plus enterprise segment</li>
+                            <li>Created email marketing campaigns using Klaviyo with average revenue of $50K per campaign</li>
+                            <li>Managed content creation for blog, achieving 200% increase in organic traffic</li>
+                            <li>Assisted with event marketing for Shopify Unite conference with 3,000+ attendees</li>
+                            <li>Conducted competitive analysis and market research for new product launches</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3>Core Competencies</h3>
+                <div class="skills-container">
+                    <div class="skill-category">
+                        <h4>Digital Marketing</h4>
+                        <div class="skill-list">
+                            <span class="skill-tag">Performance Marketing</span>
+                            <span class="skill-tag">PPC Advertising</span>
+                            <span class="skill-tag">SEO/SEM</span>
+                            <span class="skill-tag">Social Media Marketing</span>
+                            <span class="skill-tag">Email Marketing</span>
+                            <span class="skill-tag">Content Marketing</span>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h4>Marketing Technology</h4>
+                        <div class="skill-list">
+                            <span class="skill-tag">HubSpot</span>
+                            <span class="skill-tag">Salesforce Pardot</span>
+                            <span class="skill-tag">Google Analytics</span>
+                            <span class="skill-tag">Google Ads</span>
+                            <span class="skill-tag">Facebook Ads Manager</span>
+                            <span class="skill-tag">LinkedIn Campaign Manager</span>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h4>Analytics & Data</h4>
+                        <div class="skill-list">
+                            <span class="skill-tag">Google Analytics 4</span>
+                            <span class="skill-tag">Tableau</span>
+                            <span class="skill-tag">Mixpanel</span>
+                            <span class="skill-tag">Hotjar</span>
+                            <span class="skill-tag">A/B Testing</span>
+                            <span class="skill-tag">Attribution Modeling</span>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h4>Content & Creative</h4>
+                        <div class="skill-list">
+                            <span class="skill-tag">Copywriting</span>
+                            <span class="skill-tag">Video Marketing</span>
+                            <span class="skill-tag">Graphic Design</span>
+                            <span class="skill-tag">Adobe Creative Suite</span>
+                            <span class="skill-tag">Canva</span>
+                            <span class="skill-tag">Figma</span>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h4>Strategy & Growth</h4>
+                        <div class="skill-list">
+                            <span class="skill-tag">Growth Hacking</span>
+                            <span class="skill-tag">Customer Journey Mapping</span>
+                            <span class="skill-tag">Marketing Automation</span>
+                            <span class="skill-tag">Lead Generation</span>
+                            <span class="skill-tag">Account-Based Marketing</span>
+                            <span class="skill-tag">Conversion Optimization</span>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h4>Project Management</h4>
+                        <div class="skill-list">
+                            <span class="skill-tag">Asana</span>
+                            <span class="skill-tag">Monday.com</span>
+                            <span class="skill-tag">Slack</span>
+                            <span class="skill-tag">Agile/Scrum</span>
+                            <span class="skill-tag">Budget Management</span>
+                            <span class="skill-tag">Team Leadership</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3>Education</h3>
+                <div class="education-item">
+                    <div class="degree">Master of Business Administration (MBA)</div>
+                    <div class="university">Northwestern Kellogg School of Management - Chicago, IL</div>
+                    <div class="year">2014 - 2016</div>
+                    <div style="margin-top: 10px; font-style: italic;">Concentration: Marketing & Digital Innovation</div>
+                </div>
+                <div class="education-item">
+                    <div class="degree">Bachelor of Arts in Communications</div>
+                    <div class="university">University of Michigan - Ann Arbor, MI</div>
+                    <div class="year">2010 - 2014</div>
+                    <div style="margin-top: 10px; font-style: italic;">Minor: Business Administration, Magna Cum Laude</div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3>Certifications</h3>
+                <div class="certifications">
+                    <div class="cert-item">
+                        <div class="cert-title">Google Analytics Certified</div>
+                        <div class="cert-issuer">Google (2023)</div>
+                    </div>
+                    <div class="cert-item">
+                        <div class="cert-title">HubSpot Inbound Marketing Certified</div>
+                        <div class="cert-issuer">HubSpot Academy (2023)</div>
+                    </div>
+                    <div class="cert-item">
+                        <div class="cert-title">Google Ads Certified</div>
+                        <div class="cert-issuer">Google (2022)</div>
+                    </div>
+                    <div class="cert-item">
+                        <div class="cert-title">Facebook Blueprint Certified</div>
+                        <div class="cert-issuer">Meta (2022)</div>
+                    </div>
+                    <div class="cert-item">
+                        <div class="cert-title">Salesforce Marketing Cloud Consultant</div>
+                        <div class="cert-issuer">Salesforce (2021)</div>
+                    </div>
+                    <div class="cert-item">
+                        <div class="cert-title">Content Marketing Certified</div>
+                        <div class="cert-issuer">Content Marketing Institute (2020)</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section achievements">
+                <h3>Notable Achievements & Awards</h3>
+                <div class="job-description">
+                    <ul>
+                        <li>Named "Rising Star in Marketing" by Marketing Land Magazine (2023)</li>
+                        <li>Winner of HubSpot's "Campaign of the Year" award for ABM strategy execution (2022)</li>
+                        <li>Featured speaker at Content Marketing World 2023: "AI-Powered Personalization at Scale"</li>
+                        <li>Authored whitepaper "The Future of B2B Marketing Attribution" downloaded 15K+ times</li>
+                        <li>Led campaign that won Webby Award for "Best Digital Marketing Campaign" (2021)</li>
+                        <li>Increased company's marketing qualified leads by 400% within first 18 months at HubSpot</li>
+                        <li>Published thought leadership articles in MarketingProfs, Search Engine Land, and Social Media Examiner</li>
+                        <li>Volunteer marketing consultant for 3 nonprofit organizations, contributing $50K+ in pro bono services</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 
