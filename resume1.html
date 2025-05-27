@@ -31,35 +31,55 @@
         .header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 40px;
+            padding: 50px 40px;
             text-align: center;
         }
         
         .header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            font-weight: 300;
+            font-size: 2.8em;
+            margin-bottom: 8px;
+            font-weight: 600;
+            letter-spacing: -1px;
         }
         
         .header h2 {
-            font-size: 1.4em;
-            opacity: 0.9;
+            font-size: 1.3em;
+            opacity: 0.95;
             font-weight: 300;
+            margin-bottom: 35px;
         }
         
-        .contact-info {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-top: 25px;
-            flex-wrap: wrap;
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            max-width: 600px;
+            margin: 0 auto;
         }
         
         .contact-item {
             display: flex;
             align-items: center;
-            gap: 8px;
+            justify-content: center;
+            gap: 12px;
             font-size: 0.95em;
+            padding: 12px 20px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 25px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .contact-item span:first-child {
+            font-size: 1.1em;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .contact-item span:last-child {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         
         .content {
@@ -93,6 +113,10 @@
             font-size: 1.05em;
             color: #555;
             line-height: 1.7;
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
         }
         
         .job {
@@ -121,12 +145,14 @@
             font-size: 1.1em;
             color: #667eea;
             margin-bottom: 5px;
+            font-weight: 500;
         }
         
         .duration {
             color: #888;
             font-size: 0.95em;
             font-style: italic;
+            white-space: nowrap;
         }
         
         .job-description {
@@ -223,13 +249,14 @@
         }
         
         @media (max-width: 768px) {
-            .contact-info {
-                flex-direction: column;
+            .contact-grid {
+                grid-template-columns: 1fr;
                 gap: 15px;
             }
             
             .job-header {
                 flex-direction: column;
+                gap: 5px;
             }
             
             .content {
@@ -239,6 +266,10 @@
             .header {
                 padding: 30px 20px;
             }
+            
+            .header h1 {
+                font-size: 2.2em;
+            }
         }
     </style>
 </head>
@@ -247,7 +278,7 @@
         <div class="header">
             <h1>Michael J. Anderson</h1>
             <h2>Senior Software Engineer</h2>
-            <div class="contact-info">
+            <div class="contact-grid">
                 <div class="contact-item">
                     <span>📧</span>
                     <span>michael.anderson@email.com</span>
@@ -262,11 +293,7 @@
                 </div>
                 <div class="contact-item">
                     <span>💼</span>
-                    <span>linkedin.com/in/michael-anderson-dev</span>
-                </div>
-                <div class="contact-item">
-                    <span>🐙</span>
-                    <span>github.com/manderson-dev</span>
+                    <span>linkedin.com/in/michael-anderson</span>
                 </div>
             </div>
         </div>
@@ -275,7 +302,7 @@
             <div class="section">
                 <h3>Professional Summary</h3>
                 <div class="summary">
-                    Accomplished Senior Software Engineer with 18+ years of experience designing and implementing scalable, high-performance applications across diverse industries. Expert in full-stack development, cloud architecture, and agile methodologies. Proven track record of leading cross-functional teams, mentoring junior developers, and delivering enterprise-level solutions that drive business growth. Passionate about emerging technologies and committed to writing clean, maintainable code.
+                    Accomplished Senior Software Engineer with 18+ years of experience designing and implementing scalable, high-performance applications across diverse industries. Expert in full-stack development, cloud architecture, and agile methodologies. Proven track record of leading cross-functional teams, mentoring junior developers, and delivering enterprise-level solutions that drive business growth.
                 </div>
             </div>
             
