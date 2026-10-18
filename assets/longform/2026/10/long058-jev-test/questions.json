@@ -1,0 +1,616 @@
+[
+ {
+  "id": "en_image_01",
+  "cat": "en_image",
+  "modality": "image",
+  "qtype": "noul",
+  "question": "Does the menu list Chicken Burger at $8.40?",
+  "truth": true,
+  "image": "images/en_menu.jpg",
+  "state_text": null,
+  "choices": null
+ },
+ {
+  "id": "en_image_02",
+  "cat": "en_image",
+  "modality": "image",
+  "qtype": "noul",
+  "question": "Does the menu list French Fries at $3.70?",
+  "truth": false,
+  "image": "images/en_menu.jpg",
+  "state_text": null,
+  "choices": null
+ },
+ {
+  "id": "en_image_03",
+  "cat": "en_image",
+  "modality": "image",
+  "qtype": "choice",
+  "question": "What kind of problem does this error dialog show?",
+  "truth": "permission",
+  "image": "images/en_err_1.jpg",
+  "state_text": null,
+  "choices": {
+   "permission": "File or folder permission problem",
+   "network": "Network, connection or timeout problem",
+   "syntax": "Code syntax error",
+   "memory": "Out of memory"
+  }
+ },
+ {
+  "id": "en_image_04",
+  "cat": "en_image",
+  "modality": "image",
+  "qtype": "choice",
+  "question": "What kind of problem does this error dialog show?",
+  "truth": "network",
+  "image": "images/en_err_2.jpg",
+  "state_text": null,
+  "choices": {
+   "permission": "File or folder permission problem",
+   "network": "Network, connection or timeout problem",
+   "syntax": "Code syntax error",
+   "memory": "Out of memory"
+  }
+ },
+ {
+  "id": "en_image_05",
+  "cat": "en_image",
+  "modality": "image",
+  "qtype": "choice",
+  "question": "What kind of problem does this error dialog show?",
+  "truth": "syntax",
+  "image": "images/en_err_3.jpg",
+  "state_text": null,
+  "choices": {
+   "permission": "File or folder permission problem",
+   "network": "Network, connection or timeout problem",
+   "syntax": "Code syntax error",
+   "memory": "Out of memory"
+  }
+ },
+ {
+  "id": "en_image_06",
+  "cat": "en_image",
+  "modality": "image",
+  "qtype": "choice",
+  "question": "What kind of problem does this error dialog show?",
+  "truth": "memory",
+  "image": "images/en_err_4.jpg",
+  "state_text": null,
+  "choices": {
+   "permission": "File or folder permission problem",
+   "network": "Network, connection or timeout problem",
+   "syntax": "Code syntax error",
+   "memory": "Out of memory"
+  }
+ },
+ {
+  "id": "en_image_07",
+  "cat": "en_image",
+  "modality": "image",
+  "qtype": "noul",
+  "question": "Is the receipt total 88,300 KRW?",
+  "truth": true,
+  "image": "images/en_receipt.jpg",
+  "state_text": null,
+  "choices": null
+ },
+ {
+  "id": "en_image_08",
+  "cat": "en_image",
+  "modality": "image",
+  "qtype": "noul",
+  "question": "Is the receipt total 88,600 KRW?",
+  "truth": false,
+  "image": "images/en_receipt.jpg",
+  "state_text": null,
+  "choices": null
+ },
+ {
+  "id": "en_image_09",
+  "cat": "en_image",
+  "modality": "image",
+  "qtype": "noul",
+  "question": "Is the coupon code in the small print exactly 'FUN2O26' (with the letter O)?",
+  "truth": false,
+  "image": "images/en_fine.jpg",
+  "state_text": null,
+  "choices": null
+ },
+ {
+  "id": "en_image_10",
+  "cat": "en_image",
+  "modality": "image",
+  "qtype": "noul",
+  "question": "Is the large name in the center of this image 'Laya'?",
+  "truth": true,
+  "image": "images/en_thumb_laya.jpg",
+  "state_text": null,
+  "choices": null
+ },
+ {
+  "id": "ko_image_01",
+  "cat": "ko_image",
+  "modality": "image",
+  "qtype": "noul",
+  "question": "메뉴판에서 된장찌개 가격이 8,500원인가요?",
+  "truth": true,
+  "image": "images/ko_menu.jpg",
+  "state_text": null,
+  "choices": null
+ },
+ {
+  "id": "ko_image_02",
+  "cat": "ko_image",
+  "modality": "image",
+  "qtype": "noul",
+  "question": "메뉴판에서 제육볶음 가격이 11,500원인가요?",
+  "truth": false,
+  "image": "images/ko_menu.jpg",
+  "state_text": null,
+  "choices": null
+ },
+ {
+  "id": "ko_image_03",
+  "cat": "ko_image",
+  "modality": "image",
+  "qtype": "choice",
+  "question": "이 오류 창은 어떤 종류의 문제인가요?",
+  "truth": "permission",
+  "image": "images/ko_err_1.jpg",
+  "state_text": null,
+  "choices": {
+   "permission": "파일·폴더 권한 문제",
+   "network": "네트워크·연결·시간 초과 문제",
+   "syntax": "코드 문법 오류",
+   "memory": "메모리 부족"
+  }
+ },
+ {
+  "id": "ko_image_04",
+  "cat": "ko_image",
+  "modality": "image",
+  "qtype": "choice",
+  "question": "이 오류 창은 어떤 종류의 문제인가요?",
+  "truth": "network",
+  "image": "images/ko_err_2.jpg",
+  "state_text": null,
+  "choices": {
+   "permission": "파일·폴더 권한 문제",
+   "network": "네트워크·연결·시간 초과 문제",
+   "syntax": "코드 문법 오류",
+   "memory": "메모리 부족"
+  }
+ },
+ {
+  "id": "ko_image_05",
+  "cat": "ko_image",
+  "modality": "image",
+  "qtype": "choice",
+  "question": "이 오류 창은 어떤 종류의 문제인가요?",
+  "truth": "syntax",
+  "image": "images/ko_err_3.jpg",
+  "state_text": null,
+  "choices": {
+   "permission": "파일·폴더 권한 문제",
+   "network": "네트워크·연결·시간 초과 문제",
+   "syntax": "코드 문법 오류",
+   "memory": "메모리 부족"
+  }
+ },
+ {
+  "id": "ko_image_06",
+  "cat": "ko_image",
+  "modality": "image",
+  "qtype": "choice",
+  "question": "이 오류 창은 어떤 종류의 문제인가요?",
+  "truth": "memory",
+  "image": "images/ko_err_4.jpg",
+  "state_text": null,
+  "choices": {
+   "permission": "파일·폴더 권한 문제",
+   "network": "네트워크·연결·시간 초과 문제",
+   "syntax": "코드 문법 오류",
+   "memory": "메모리 부족"
+  }
+ },
+ {
+  "id": "ko_image_07",
+  "cat": "ko_image",
+  "modality": "image",
+  "qtype": "noul",
+  "question": "영수증 합계가 82,300원인가요?",
+  "truth": true,
+  "image": "images/ko_receipt.jpg",
+  "state_text": null,
+  "choices": null
+ },
+ {
+  "id": "ko_image_08",
+  "cat": "ko_image",
+  "modality": "image",
+  "qtype": "noul",
+  "question": "영수증 합계가 82,000원인가요?",
+  "truth": false,
+  "image": "images/ko_receipt.jpg",
+  "state_text": null,
+  "choices": null
+ },
+ {
+  "id": "ko_image_09",
+  "cat": "ko_image",
+  "modality": "image",
+  "qtype": "noul",
+  "question": "아래 작은 글씨의 쿠폰 코드가 정확히 '잔재미2025'인가요?",
+  "truth": false,
+  "image": "images/ko_fine.jpg",
+  "state_text": null,
+  "choices": null
+ },
+ {
+  "id": "ko_image_10",
+  "cat": "ko_image",
+  "modality": "image",
+  "qtype": "noul",
+  "question": "이미지 위쪽 문구가 '신입·주니어 개발자'로 시작하나요?",
+  "truth": true,
+  "image": "images/ko_thumb_s024.jpg",
+  "state_text": null,
+  "choices": null
+ },
+ {
+  "id": "en_text_01",
+  "cat": "en_text",
+  "modality": "text",
+  "qtype": "noul",
+  "question": "Is this customer review positive overall (the customer is satisfied)?",
+  "truth": true,
+  "image": null,
+  "state_text": "Arrived in two days and the battery lasts all weekend. Would buy again.",
+  "choices": null
+ },
+ {
+  "id": "en_text_02",
+  "cat": "en_text",
+  "modality": "text",
+  "qtype": "noul",
+  "question": "Is this customer review positive overall (the customer is satisfied)?",
+  "truth": false,
+  "image": null,
+  "state_text": "Oh great, it broke after one day. Exactly what I paid for. Amazing quality.",
+  "choices": null
+ },
+ {
+  "id": "en_text_03",
+  "cat": "en_text",
+  "modality": "text",
+  "qtype": "noul",
+  "question": "Is this customer review positive overall (the customer is satisfied)?",
+  "truth": true,
+  "image": null,
+  "state_text": "Not bad at all — honestly better than the expensive one I returned.",
+  "choices": null
+ },
+ {
+  "id": "en_text_04",
+  "cat": "en_text",
+  "modality": "text",
+  "qtype": "noul",
+  "question": "Is this message spam or a phishing attempt?",
+  "truth": true,
+  "image": null,
+  "state_text": "Congratulations! You won a $500 gift card. Click http://bit.ly/claim-now to claim within 24h.",
+  "choices": null
+ },
+ {
+  "id": "en_text_05",
+  "cat": "en_text",
+  "modality": "text",
+  "qtype": "noul",
+  "question": "Is this message spam or a phishing attempt?",
+  "truth": false,
+  "image": null,
+  "state_text": "Hi Dave, the invoice for September is attached. Let me know if the numbers look right.",
+  "choices": null
+ },
+ {
+  "id": "en_text_06",
+  "cat": "en_text",
+  "modality": "text",
+  "qtype": "noul",
+  "question": "Does this code have a bug that would raise an error or return the wrong element?",
+  "truth": true,
+  "image": null,
+  "state_text": "def last_item(xs):\n    # return the last element\n    return xs[len(xs)]",
+  "choices": null
+ },
+ {
+  "id": "en_text_07",
+  "cat": "en_text",
+  "modality": "text",
+  "qtype": "noul",
+  "question": "Does this code have a bug that would raise an error or return the wrong element?",
+  "truth": false,
+  "image": null,
+  "state_text": "def last_item(xs):\n    # return the last element\n    return xs[-1]",
+  "choices": null
+ },
+ {
+  "id": "en_text_08",
+  "cat": "en_text",
+  "modality": "text",
+  "qtype": "choice",
+  "question": "Which team should handle this customer message?",
+  "truth": "billing",
+  "image": null,
+  "state_text": "I was charged twice for my October subscription, please refund one.",
+  "choices": {
+   "billing": "Payments, invoices, refunds",
+   "technical": "Problems using the product or app",
+   "shipping": "Delivery and tracking"
+  }
+ },
+ {
+  "id": "en_text_09",
+  "cat": "en_text",
+  "modality": "text",
+  "qtype": "choice",
+  "question": "Which team should handle this customer message?",
+  "truth": "technical",
+  "image": null,
+  "state_text": "The app crashes every time I open the settings page on iOS.",
+  "choices": {
+   "billing": "Payments, invoices, refunds",
+   "technical": "Problems using the product or app",
+   "shipping": "Delivery and tracking"
+  }
+ },
+ {
+  "id": "en_text_10",
+  "cat": "en_text",
+  "modality": "text",
+  "qtype": "choice",
+  "question": "Which team should handle this customer message?",
+  "truth": "shipping",
+  "image": null,
+  "state_text": "My package says delivered but nothing arrived at my door.",
+  "choices": {
+   "billing": "Payments, invoices, refunds",
+   "technical": "Problems using the product or app",
+   "shipping": "Delivery and tracking"
+  }
+ },
+ {
+  "id": "ko_text_01",
+  "cat": "ko_text",
+  "modality": "text",
+  "qtype": "noul",
+  "question": "이 리뷰를 쓴 고객은 전체적으로 만족했나요?",
+  "truth": true,
+  "image": null,
+  "state_text": "이틀 만에 왔고 배터리도 주말 내내 가요. 또 살 생각 있습니다.",
+  "choices": null
+ },
+ {
+  "id": "ko_text_02",
+  "cat": "ko_text",
+  "modality": "text",
+  "qtype": "noul",
+  "question": "이 리뷰를 쓴 고객은 전체적으로 만족했나요?",
+  "truth": false,
+  "image": null,
+  "state_text": "와 배송 진짜 빠르네요. 주문하고 2주 만에 왔어요. 최고입니다 정말.",
+  "choices": null
+ },
+ {
+  "id": "ko_text_03",
+  "cat": "ko_text",
+  "modality": "text",
+  "qtype": "noul",
+  "question": "이 리뷰를 쓴 고객은 전체적으로 만족했나요?",
+  "truth": true,
+  "image": null,
+  "state_text": "기대 안 했는데 생각보다 괜찮네요. 반품한 비싼 제품보다 나아요.",
+  "choices": null
+ },
+ {
+  "id": "ko_text_04",
+  "cat": "ko_text",
+  "modality": "text",
+  "qtype": "noul",
+  "question": "이 문자는 스팸이나 피싱인가요?",
+  "truth": true,
+  "image": null,
+  "state_text": "[국제발신] 고객님 택배 주소 불일치로 반송 예정. 주소 수정: http://bit.ly/kr-post",
+  "choices": null
+ },
+ {
+  "id": "ko_text_05",
+  "cat": "ko_text",
+  "modality": "text",
+  "qtype": "noul",
+  "question": "이 문자는 스팸이나 피싱인가요?",
+  "truth": false,
+  "image": null,
+  "state_text": "대표님, 9월 세금계산서 첨부드립니다. 금액 확인 부탁드립니다.",
+  "choices": null
+ },
+ {
+  "id": "ko_text_06",
+  "cat": "ko_text",
+  "modality": "text",
+  "qtype": "noul",
+  "question": "이 댓글은 상대를 깎아내리는 악성 댓글인가요? (정중한 지적은 해당 없음)",
+  "truth": false,
+  "image": null,
+  "state_text": "영상 잘 봤습니다. 다만 3분쯤 설명은 조금 빨라서 다시 봤어요.",
+  "choices": null
+ },
+ {
+  "id": "ko_text_07",
+  "cat": "ko_text",
+  "modality": "text",
+  "qtype": "noul",
+  "question": "이 댓글은 상대를 깎아내리는 악성 댓글인가요? (정중한 지적은 해당 없음)",
+  "truth": true,
+  "image": null,
+  "state_text": "이딴 걸 강의라고 올리냐 수준 진짜 한심하다",
+  "choices": null
+ },
+ {
+  "id": "ko_text_08",
+  "cat": "ko_text",
+  "modality": "text",
+  "qtype": "choice",
+  "question": "이 문의는 어느 팀이 처리해야 하나요?",
+  "truth": "billing",
+  "image": null,
+  "state_text": "10월 구독료가 두 번 결제됐어요. 하나 환불해 주세요.",
+  "choices": {
+   "billing": "결제·환불·영수증",
+   "technical": "앱·서비스 사용 중 문제",
+   "shipping": "배송·택배 조회"
+  }
+ },
+ {
+  "id": "ko_text_09",
+  "cat": "ko_text",
+  "modality": "text",
+  "qtype": "choice",
+  "question": "이 문의는 어느 팀이 처리해야 하나요?",
+  "truth": "technical",
+  "image": null,
+  "state_text": "아이폰에서 설정 화면만 들어가면 앱이 꺼집니다.",
+  "choices": {
+   "billing": "결제·환불·영수증",
+   "technical": "앱·서비스 사용 중 문제",
+   "shipping": "배송·택배 조회"
+  }
+ },
+ {
+  "id": "ko_text_10",
+  "cat": "ko_text",
+  "modality": "text",
+  "qtype": "choice",
+  "question": "이 문의는 어느 팀이 처리해야 하나요?",
+  "truth": "shipping",
+  "image": null,
+  "state_text": "배송 완료로 나오는데 집 앞에 아무것도 없어요.",
+  "choices": {
+   "billing": "결제·환불·영수증",
+   "technical": "앱·서비스 사용 중 문제",
+   "shipping": "배송·택배 조회"
+  }
+ },
+ {
+  "id": "fc_seo_01",
+  "cat": "fc_seo",
+  "modality": "image",
+  "qtype": "noul",
+  "question": "이 웹페이지 첫 화면에 사이트가 무엇을 하는 곳인지 알려 주는 큰 제목이 보이나요?",
+  "truth": true,
+  "image": "images/fc_first_screen.jpg",
+  "state_text": null,
+  "choices": null
+ },
+ {
+  "id": "fc_seo_02",
+  "cat": "fc_seo",
+  "modality": "image",
+  "qtype": "noul",
+  "question": "첫 화면에 회원가입이나 가입을 하라는 버튼이 보이나요?",
+  "truth": true,
+  "image": "images/fc_first_screen.jpg",
+  "state_text": null,
+  "choices": null
+ },
+ {
+  "id": "fc_seo_03",
+  "cat": "fc_seo",
+  "modality": "image",
+  "qtype": "noul",
+  "question": "첫 화면에 강의 가격(원)이 보이나요?",
+  "truth": false,
+  "image": "images/fc_first_screen.jpg",
+  "state_text": null,
+  "choices": null
+ },
+ {
+  "id": "fc_seo_04",
+  "cat": "fc_seo",
+  "modality": "image",
+  "qtype": "noul",
+  "question": "첫 화면에 수강생이 쓴 후기 문장이 보이나요?",
+  "truth": false,
+  "image": "images/fc_first_screen.jpg",
+  "state_text": null,
+  "choices": null
+ },
+ {
+  "id": "fc_seo_05",
+  "cat": "fc_seo",
+  "modality": "image",
+  "qtype": "noul",
+  "question": "화면 왼쪽 위 로고에 '잔재미코딩'이라는 글자가 있나요?",
+  "truth": true,
+  "image": "images/fc_first_screen.jpg",
+  "state_text": null,
+  "choices": null
+ },
+ {
+  "id": "fc_seo_06",
+  "cat": "fc_seo",
+  "modality": "text",
+  "qtype": "noul",
+  "question": "title 태그가 60자 이내이고 사이트 이름과 무엇을 하는 사이트인지를 함께 담고 있나요?",
+  "truth": true,
+  "image": null,
+  "state_text": "<head>\n    <meta charset=\"UTF-8\">\n    <title>잔재미코딩 - 10년간 10만명이 검증한 IT 강의</title>\n    <meta name=\"description\" content=\"AI 바이브코딩, 풀스택 웹·앱 개발, 데이터 분석까지. 10년간 10만명이 검증한 체계적 로드맵으로 가장 빠르게 성장하세요. 입문부터 실전 프로젝트까지 잔재미코딩에서 시작하세요.\">\n    <meta name=\"keywords\" content=\"잔재미코딩, AI 강의, 바이브코딩, 풀스택, 데이터분석, Claude Code, 파이썬, 웹개발, 앱개발, IT 교육\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <meta name=\"robots\" content=\"index, follow\">\n    <meta name=\"author\" content=\"Dave Lee\">\n    <meta http-equiv=\"content-language\" content=\"ko-KR\">\n    <meta property=\"og:title\" content=\"잔재미코딩 - 10년간 10만명이 검증한 IT 강의\">\n    <meta property=\"og:description\" content=\"AI 바이브코딩, 풀스택, 데이터 분석까지. 체계적 로드맵으로 가장 빠르게 성장하세요. 10만명이 선택한 잔재미코딩.\">\n    <meta property=\"og:image\" content=\"https://www.fun-coding.org/img/funcoding2026logo-og.png\">\n    <meta property=\"og:url\" content=\"https://www.fun-coding.org\">\n    <meta property=\"og:type\" content=\"website\">\n    <meta property=\"og:site_name\" content=\"잔재미코딩\">\n    <meta name=\"twitter:card\" content=\"summary_large_image\">\n    <meta name=\"twitter:title\" content=\"잔재미코딩 - 10년간 10만명이 검증한 IT 강의\">\n    <meta name=\"twitter:description\" content=\"AI 바이브코딩, 풀스택, 데이터 분석까지. 체계적 로드맵으로 가장 빠르게 성장하세요.\">\n    <meta name=\"twitter:image\" content=\"https://www.fun-coding.org/img/funcoding2026logo-og.png\">\n    <link rel=\"canonical\" href=\"https://www.fun-coding.org\">\n    <link rel=\"icon\" href=\"img/funcodingnewlogo128128.png?v=2.0\">\n    <link rel=\"apple-touch-icon\" href=\"img/funcodingnewlogo128128.png?v=2.0\">\n    <!-- Google Tag Manager -->\n    <link rel=\"preconnect\" href=\"https://fonts.googleapis.com\">\n    <link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin>\n    <!-- Sample-only styles: the original homepage and shared assets are unchanged. -->\n</head>",
+  "choices": null
+ },
+ {
+  "id": "fc_seo_07",
+  "cat": "fc_seo",
+  "modality": "text",
+  "qtype": "noul",
+  "question": "meta description이 없거나 160자를 넘나요?",
+  "truth": false,
+  "image": null,
+  "state_text": "<head>\n    <meta charset=\"UTF-8\">\n    <title>잔재미코딩 - 10년간 10만명이 검증한 IT 강의</title>\n    <meta name=\"description\" content=\"AI 바이브코딩, 풀스택 웹·앱 개발, 데이터 분석까지. 10년간 10만명이 검증한 체계적 로드맵으로 가장 빠르게 성장하세요. 입문부터 실전 프로젝트까지 잔재미코딩에서 시작하세요.\">\n    <meta name=\"keywords\" content=\"잔재미코딩, AI 강의, 바이브코딩, 풀스택, 데이터분석, Claude Code, 파이썬, 웹개발, 앱개발, IT 교육\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <meta name=\"robots\" content=\"index, follow\">\n    <meta name=\"author\" content=\"Dave Lee\">\n    <meta http-equiv=\"content-language\" content=\"ko-KR\">\n    <meta property=\"og:title\" content=\"잔재미코딩 - 10년간 10만명이 검증한 IT 강의\">\n    <meta property=\"og:description\" content=\"AI 바이브코딩, 풀스택, 데이터 분석까지. 체계적 로드맵으로 가장 빠르게 성장하세요. 10만명이 선택한 잔재미코딩.\">\n    <meta property=\"og:image\" content=\"https://www.fun-coding.org/img/funcoding2026logo-og.png\">\n    <meta property=\"og:url\" content=\"https://www.fun-coding.org\">\n    <meta property=\"og:type\" content=\"website\">\n    <meta property=\"og:site_name\" content=\"잔재미코딩\">\n    <meta name=\"twitter:card\" content=\"summary_large_image\">\n    <meta name=\"twitter:title\" content=\"잔재미코딩 - 10년간 10만명이 검증한 IT 강의\">\n    <meta name=\"twitter:description\" content=\"AI 바이브코딩, 풀스택, 데이터 분석까지. 체계적 로드맵으로 가장 빠르게 성장하세요.\">\n    <meta name=\"twitter:image\" content=\"https://www.fun-coding.org/img/funcoding2026logo-og.png\">\n    <link rel=\"canonical\" href=\"https://www.fun-coding.org\">\n    <link rel=\"icon\" href=\"img/funcodingnewlogo128128.png?v=2.0\">\n    <link rel=\"apple-touch-icon\" href=\"img/funcodingnewlogo128128.png?v=2.0\">\n    <!-- Google Tag Manager -->\n    <link rel=\"preconnect\" href=\"https://fonts.googleapis.com\">\n    <link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin>\n    <!-- Sample-only styles: the original homepage and shared assets are unchanged. -->\n</head>",
+  "choices": null
+ },
+ {
+  "id": "fc_seo_08",
+  "cat": "fc_seo",
+  "modality": "text",
+  "qtype": "noul",
+  "question": "title과 og:title이 서로 다른가요?",
+  "truth": false,
+  "image": null,
+  "state_text": "<head>\n    <meta charset=\"UTF-8\">\n    <title>잔재미코딩 - 10년간 10만명이 검증한 IT 강의</title>\n    <meta name=\"description\" content=\"AI 바이브코딩, 풀스택 웹·앱 개발, 데이터 분석까지. 10년간 10만명이 검증한 체계적 로드맵으로 가장 빠르게 성장하세요. 입문부터 실전 프로젝트까지 잔재미코딩에서 시작하세요.\">\n    <meta name=\"keywords\" content=\"잔재미코딩, AI 강의, 바이브코딩, 풀스택, 데이터분석, Claude Code, 파이썬, 웹개발, 앱개발, IT 교육\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <meta name=\"robots\" content=\"index, follow\">\n    <meta name=\"author\" content=\"Dave Lee\">\n    <meta http-equiv=\"content-language\" content=\"ko-KR\">\n    <meta property=\"og:title\" content=\"잔재미코딩 - 10년간 10만명이 검증한 IT 강의\">\n    <meta property=\"og:description\" content=\"AI 바이브코딩, 풀스택, 데이터 분석까지. 체계적 로드맵으로 가장 빠르게 성장하세요. 10만명이 선택한 잔재미코딩.\">\n    <meta property=\"og:image\" content=\"https://www.fun-coding.org/img/funcoding2026logo-og.png\">\n    <meta property=\"og:url\" content=\"https://www.fun-coding.org\">\n    <meta property=\"og:type\" content=\"website\">\n    <meta property=\"og:site_name\" content=\"잔재미코딩\">\n    <meta name=\"twitter:card\" content=\"summary_large_image\">\n    <meta name=\"twitter:title\" content=\"잔재미코딩 - 10년간 10만명이 검증한 IT 강의\">\n    <meta name=\"twitter:description\" content=\"AI 바이브코딩, 풀스택, 데이터 분석까지. 체계적 로드맵으로 가장 빠르게 성장하세요.\">\n    <meta name=\"twitter:image\" content=\"https://www.fun-coding.org/img/funcoding2026logo-og.png\">\n    <link rel=\"canonical\" href=\"https://www.fun-coding.org\">\n    <link rel=\"icon\" href=\"img/funcodingnewlogo128128.png?v=2.0\">\n    <link rel=\"apple-touch-icon\" href=\"img/funcodingnewlogo128128.png?v=2.0\">\n    <!-- Google Tag Manager -->\n    <link rel=\"preconnect\" href=\"https://fonts.googleapis.com\">\n    <link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin>\n    <!-- Sample-only styles: the original homepage and shared assets are unchanged. -->\n</head>",
+  "choices": null
+ },
+ {
+  "id": "fc_seo_09",
+  "cat": "fc_seo",
+  "modality": "text",
+  "qtype": "noul",
+  "question": "이 페이지에 h1 제목이 정확히 하나만 있나요?",
+  "truth": true,
+  "image": null,
+  "state_text": "<h1> AI × IT 슈퍼 역량으로취업·수익화까지\n<h2> AI 활용부터 IT 전문가까지 목표별 순서까지 정해진 체계적 로드맵 여기밖에 없습니다\n<h2> 최강 AI 활용 + 풀스택 + 데이터 풀로드맵 (2026)\n<h2> 무료 강의/자료\n<h2> 최강 AI 활용 로드맵\n<h2> 가장 빠른 웹, 앱 개발 로드맵\n<h2> 가장 빠른 데이터 분석/과학 로드맵\n<h2> 컴퓨터공학(CS) 로드맵\n<h2> 로드맵 대신, 원하는 강의만 골라 나만의 묶음 할인을 만들어 보세요\n<h2> 왜 10만명이잔재미코딩을 선택할까요?\n<h2> 압도적인 실제 수강평을 확인하세요\n<h2> 점점 많은 분들이 수강하시는안정적인 교육 서비스입니다\n<h2> 회원가입하시면\n<h2> 주요 블로그 글\n<h2> 풀스택 과정 학습 후수익화 및 1인 비즈니스를고려하신다면\n<h2> 완전 IT 초입문자라면?\n<h2> 로드맵 학습 후 실전 멘토링",
+  "choices": null
+ },
+ {
+  "id": "fc_seo_10",
+  "cat": "fc_seo",
+  "modality": "text",
+  "qtype": "noul",
+  "question": "이 이미지 태그들 가운데 alt(대체 텍스트)가 없거나 비어 있는 것이 절반을 넘나요?",
+  "truth": true,
+  "image": null,
+  "state_text": "<img src=\"https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/6bf4f2fb9312fd4ce435657c93b62707.png\" alt=\"잔재미코딩\">\n<img class=\"fc-rm-thumb\" src=\"/course/imgs/ultra-ai-dev-data-full-set.gif\" alt=\"\" loading=\"lazy\">\n<img class=\"fc-rm-thumb\" src=\"/course/imgs/super-ai-core-set.gif\" alt=\"\" loading=\"lazy\">\n<img class=\"fc-rm-thumb\" src=\"https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/76f3df76acbd70e6d99c7b8f1a1440d5.gif\" alt=\"\" loading=\"lazy\">\n<img class=\"fc-rm-thumb\" src=\"https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/185a5e010478595c1b87413e98a031a4.gif\" alt=\"\" loading=\"lazy\">\n<img class=\"fc-rm-thumb\" src=\"https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/47f79da439f49766a32c59c41af87572.png\" alt=\"\" loading=\"lazy\">\n<img class=\"fc-rm-thumb\" src=\"https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/4d6bae90f9977f80d2d77bcf1e10eba4.png\" alt=\"\" loading=\"lazy\">\n<img class=\"fc-rm-thumb\" src=\"https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/4a61acde67ab4c09d117fb3f0353c78f.png\" alt=\"\" loading=\"lazy\">\n<img class=\"fc-rm-thumb\" src=\"https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/70ddd133a2a919ca327b1c2150ae5bf9.png\" alt=\"\" loading=\"lazy\">\n<img src=\"https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/35f714da079d7cb96fffa613d1d50ddc.png\" alt=\"\" loading=\"lazy\">\n<img src=\"https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/a93c18f0d5038c7f3383657e0cd350af.jpg\" alt=\"\" loading=\"lazy\">\n<img src=\"https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/e38ac1c574a8e133bf939bca3c7f0f62.png\" alt=\"\" loading=\"lazy\">\n<img src=\"https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/ff3f262fdf63c544d1da50e45146e293.png\" alt=\"\" loading=\"lazy\">\n<img src=\"https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/81302d0f08bae32bbb73d7cded233658.jpg\" alt=\"\" loading=\"lazy\">\n<img src=\"https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/5a95502a18abe28adf0bae7a7e67200d.png\" alt=\"\" loading=\"lazy\">\n<img src=\"https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/e38ac1c574a8e133bf939bca3c7f0f62.png\" alt=\"\" loading=\"lazy\">\n<img src=\"https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/270840b777c5a4654427328a7d44e392.png\" alt=\"\" loading=\"lazy\">\n<img src=\"https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/ff3f262fdf63c544d1da50e45146e293.png\" alt=\"\" loading=\"lazy\">\n<img src=\"https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/35f714da079d7cb96fffa613d1d50ddc.png\" alt=\"\" loading=\"lazy\">\n<img src=\"https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/e12de90c139ed45e372a53027bbcba56.png\" alt=\"\" loading=\"lazy\">\n<img src=\"https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/0534100c323bc0e9e879b2c7848aca23.png\" alt=\"\" loading=\"lazy\">\n<img src=\"https://www.fun-coding.org/course/imgs/cc-series/cc-claudecode-automation.gif\" alt=\"\" loading=\"lazy\">\n<img src=\"https://www.fun-coding.org/course/imgs/cc-series/cc-vibecoding-basic.gif\" alt=\"\" loading=\"lazy\">\n<img src=\"https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/29294c8529ad5193417588097a8e84e6.png\" alt=\"\" loading=\"lazy\">\n<img src=\"https://www.fun-coding.org/course/imgs/cc-series/cc-aiagent-advanced.gif\" alt=\"\" loading=\"lazy\">\n<img src=\"https://www.fun-coding.org/course/imgs/cc-series/cc-datawithai.gif\" alt=\"\" loading=\"lazy\">\n<img src=\"https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/4eafbfb68cf7787029ea7a4ce6205e68.png\" alt=\"\" loading=\"lazy\">\n<img src=\"https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/8040c9e4a83b2dcc67908f41bf4996dd.png\" alt=\"\" loading=\"lazy\">\n<img\n                                            src=\"https://www.fun-coding.org/course/imgs/claudebasic_final.png\"\n                                            alt=\"\" class=\"fc-card-img\">\n<img\n                                            src=\"https://www.fun-coding.org/course/imgs/claudecodexwebapp.png\"\n                                            alt=\"\" class=\"fc-card-img\">\n<img\n                                            src=\"/course/imgs/cc-series/free-book-ai-cli.gif\"\n                                            alt=\"클로드 코드·코덱스 CLI·제미나이 CLI 완전 활용법 무료 강의\" class=\"fc-card-img\">\n<img\n                                            src=\"https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/3f92c43fdea71906ac294e5f970bf70b.jpg\"\n                                            alt=\"\" class=\"fc-card-img\">\n<img\n                                            src=\"/course/imgs/cc-series/free-book-python-data.gif\"\n                                            alt=\"잔재미코딩의 파이썬 데이터 분석 입문 무료 강의\" class=\"fc-card-img\">\n<img class=\"fc-roadmap-feature-img\" src=\"/course/imgs/super-ai-core-set.gif\" alt=\"\" loading=\"lazy\">\n<img\n                                            src=\"https://www.fun-coding.org/course/imgs/cc-series/cc-claudecode-automation.gif\"\n                                            alt=\"\" class=\"fc-card-img\">\n<img\n                                            src=\"https://www.fun-coding.org/course/imgs/cc-series/cc-vibecoding-basic.gif\"\n                                            alt=\"\" class=\"fc-card-img\">\n<img\n                                            src=\"https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/29294c8529ad5193417588097a8e84e6.png\"\n                                            alt=\"\" class=\"fc-card-img\">\n<img\n                                            src=\"https://www.fun-coding.org/course/imgs/cc-series/cc-aiagent-advanced.gif\"\n                                            alt=\"클로드코드 고급 기법과 나만의 AI 에이전트 개발 강의\"\n                                            class=\"fc-card-img\" loading=\"lazy\">\n<img\n                                            src=\"https://www.fun-coding.org/course/imgs/cc-series/cc-datawithai.gif\"\n                                            alt=\"\" class=\"fc-card-img\">\n<img\n                                            src=\"https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/4eafbfb68cf7787029ea7a4ce6205e68.png\"\n                                            alt=\"\" class=\"fc-card-img\">\n<img\n                                            src=\"https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/8040c9e4a83b2dcc67908f41bf4996dd.png\"\n                                            alt=\"\" class=\"fc-card-img\">\n<img class=\"fc-roadmap-feature-img\" src=\"https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/47f79da439f49766a32c59c41af87572.png\" alt=\"\" loading=\"lazy\">\n<img\n                                            src=\"https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/e38ac1c574a8e133bf939bca3c7f0f62.png\"\n                                            alt=\"\" class=\"fc-card-img\">\n<img\n                                            src=\"https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/ff3f262fdf63c544d1da50e45146e293.png\"\n                                            alt=\"\" class=\"fc-card-img\">\n<img\n                                            src=\"https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/35f714da079d7cb96fffa613d1d50ddc.png\"\n                                            alt=\"\" class=\"fc-card-img\">\n<img\n                                            src=\"https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/a93c18f0d5038c7f3383657e0cd350af.jpg\"\n                                            alt=\"\" class=\"fc-card-img\">\n<img\n                                            src=\"/course/imgs/fastapistart.png\"\n                                            alt=\"\" class=\"fc-card-img\">\n<img\n                                            src=\"https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/81302d0f08bae32bbb73d7cded233658.jpg\"\n                                            alt=\"\" class=\"fc-card-img\">\n<img\n                                            src=\"https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/5a95502a18abe28adf0bae7a7e67200d.png\"\n                                            alt=\"\" class=\"fc-card-img\">\n<img\n                                            src=\"https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/7e914de8b7730a14a51409ff64fd1ecd.png\"\n                                            alt=\"\" class=\"fc-card-img\">\n<img class=\"fc-roadmap-feature-img\" src=\"https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/4d6bae90f9977f80d2d77bcf1e10eba4.png\" alt=\"\" loading=\"lazy\">\n<img\n                                            src=\"https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/e38ac1c574a8e133bf939bca3c7f0f62.png\"\n                                            alt=\"\" class=\"fc-card-img\">\n<img\n                                            src=\"https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/270840b777c5a4654427328a7d44e392.png\"\n                                            alt=\"\" class=\"fc-card-img\">\n<img\n                                            src=\"https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/ff3f262fdf63c544d1da50e45146e293.png\"\n                                            alt=\"\" class=\"fc-card-img\">\n<img\n                                            src=\"https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/176d77334872def2af86889a02c2b948.jpg\"\n                                            alt=\"\" class=\"fc-card-img\">\n<img\n                                            src=\"https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/35f714da079d7cb96fffa613d1d50ddc.png\"\n                                            alt=\"\" class=\"fc-card-img\">\n<img\n                                            src=\"https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/e12de90c139ed45e372a53027bbcba56.png\"\n                                            alt=\"\" class=\"fc-card-img\">\n<img\n                                            src=\"https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/0534100c323bc0e9e879b2c7848aca23.png\"\n                                            alt=\"\" class=\"fc-card-img\">\n<img\n                                            src=\"https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/a7d6cd776e0951707a3a9a84fa243af3.png\"\n                                            alt=\"\" class=\"fc-card-img\">\n<img class=\"fc-roadmap-feature-img\" src=\"https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/4a61acde67ab4c09d117fb3f0353c78f.png\" alt=\"\" loading=\"lazy\">\n<img class=\"fc-roadmap-feature-img\" src=\"https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/70ddd133a2a919ca327b1c2150ae5bf9.png\" alt=\"\" loading=\"lazy\">\n<img\n                                            src=\"https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/e5c23a3f2ac2284b5752f19e518223ec.png\"\n                                            alt=\"\" class=\"fc-card-img\">\n<img\n                                            src=\"https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/836a9ccf73d270498e603487aa4af098.png\"\n                                            alt=\"\" class=\"fc-card-img\">\n<img\n                                            src=\"https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/801d7125c31b60125544eaba9fc481f8.png\"\n                                            alt=\"\" class=\"fc-card-img\">\n<img\n                                            src=\"https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/c2c2e714572bf442589a75f15f8cdabb.png\"\n                                            alt=\"\" class=\"fc-card-img\">\n<img src=\"/img/b2b/multicampus.png\" alt=\"멀티캠퍼스\" loading=\"lazy\">\n<img src=\"/img/b2b/ubob.png\" alt=\"유밥\" loading=\"lazy\">\n<img src=\"/img/b2b/nexon.svg\" alt=\"넥슨\" loading=\"lazy\">\n<img src=\"/img/b2b/samsung.svg\" alt=\"삼성전자\" loading=\"lazy\">\n<img src=\"/img/b2b/samsungsds.svg\" alt=\"삼성SDS\" loading=\"lazy\">\n<img src=\"/img/b2b/samsungsdi.svg\" alt=\"삼성SDI\" loading=\"lazy\">\n<img src=\"/img/b2b/hyundai-ngv.png\" alt=\"현대엔지비\" loading=\"lazy\">\n<img src=\"/img/b2b/kacnet.png\" alt=\"고려아카데미컨설팅\" loading=\"lazy\">\n<img src=\"/img/b2b/multicampus.png\" alt=\"\" loading=\"lazy\">\n<img src=\"/img/b2b/ubob.png\" alt=\"\" loading=\"lazy\">\n<img src=\"/img/b2b/nexon.svg\" alt=\"\" loading=\"lazy\">\n<img src=\"/img/b2b/samsung.svg\" alt=\"\" loading=\"lazy\">\n<img src=\"/img/b2b/samsungsds.svg\" alt=\"\" loading=\"lazy\">\n<img src=\"/img/b2b/samsungsdi.svg\" alt=\"\" loading=\"lazy\">\n<img src=\"/img/b2b/hyundai-ngv.png\" alt=\"\" loading=\"lazy\">\n<img src=\"/img/b2b/kacnet.png\" alt=\"\" loading=\"lazy\">\n<img src=\"/img/b2b/multicampus.png\" alt=\"\" loading=\"lazy\">\n<img src=\"/img/b2b/ubob.png\" alt=\"\" loading=\"lazy\">\n<img src=\"/img/b2b/nexon.svg\" alt=\"\" loading=\"lazy\">\n<img src=\"/img/b2b/samsung.svg\" alt=\"\" loading=\"lazy\">\n<img src=\"/img/b2b/samsungsds.svg\" alt=\"\" loading=\"lazy\">\n<img src=\"/img/b2b/samsungsdi.svg\" alt=\"\" loading=\"lazy\">\n<img src=\"/img/b2b/hyundai-ngv.png\" alt=\"\" loading=\"lazy\">\n<img src=\"/img/b2b/kacnet.png\" alt=\"\" loading=\"lazy\">\n<img src=\"https://www.fun-coding.org/img/chart_growth_wide_202602_960x540.png\" alt=\"수강생 성장 추이\"\n                    style=\"width: 100%; max-width: 720px; border-radius: 12px; border: 1px solid #E8E8E8;\">\n<img src=\"img/coloso_1in_roadmap.png\"\n                             alt=\"기획부터 개발, 실행까지 — 1인 개발 프로세스 풀 로드맵 (Programmer. Fun Coding × Coloso)\"\n                             loading=\"lazy\" width=\"1280\" height=\"720\">\n<img src=\"https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/0c8f978eca280c4f2645404018c9d5c5.png\"\n                                alt=\"\">\n<img src=\"https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/5070eb98858a286d7b21917a3f4235e5.png\"\n                                alt=\"\">\n<img\n                                            src=\"https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/c41e5bffb3b69c8a59e88da1127a8dbc.jpg\"\n                                            alt=\"\" class=\"fc-card-img\">\n<img\n                                            src=\"https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/72c2ddb89405a6f3fbaa236d71eafd82.jpg\"\n                                            alt=\"\" class=\"fc-card-img\">",
+  "choices": null
+ }
+]

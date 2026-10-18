@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jev 1.14 vs GPT-6 Luna 50문제</title>
+<style>
+:root{--bg:#fff;--fg:#1d2230;--dim:#5c6478;--line:#e3e6ee;--ok:#0f8a5f;--ng:#d6334a;--card:#f7f8fb;--accent:#EC7C07}
+@media (prefers-color-scheme:dark){:root{--bg:#111318;--fg:#e8ebf2;--dim:#9aa3b5;--line:#2a2f3b;--card:#181b22}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.65 -apple-system,"Apple SD Gothic Neo","Noto Sans KR",sans-serif}
+main{max-width:980px;margin:0 auto;padding:28px 16px 64px}h1{font-size:26px;line-height:1.35;margin:0 0 8px}h2{font-size:20px;margin:36px 0 12px}
+h3{font-size:18px;margin:30px 0 10px;padding-top:6px;border-top:1px solid var(--line)}p,li{color:var(--dim)}a{color:var(--accent)}
+table{border-collapse:collapse;width:100%;max-width:640px}th,td{border-bottom:1px solid var(--line);padding:8px 10px;text-align:left}td{text-align:right}
+.dl a{display:inline-block;margin:4px 10px 4px 0}code{background:var(--card);padding:1px 6px;border-radius:5px}
+.q{display:flex;gap:16px;padding:14px 0;border-bottom:1px solid var(--line)}.qi{flex:0 0 200px}.qi img{width:200px;border-radius:8px;border:1px solid var(--line)}
+.qb{flex:1;min-width:0}.id{font-size:13px;color:var(--dim)}.qt{font-weight:700;margin:2px 0 6px}.st{background:var(--card);border-radius:8px;padding:8px 12px;white-space:pre-wrap;word-break:break-all;font-size:14px;max-height:320px;overflow:auto}
+.ch{margin:4px 0;padding-left:18px;font-size:14px}.tr{margin:6px 0 4px}.a{font-size:15px}.p{color:var(--dim);font-size:14px}
+.tag{display:inline-block;font-size:12px;padding:0 8px;border-radius:10px;color:#fff;margin-left:4px}.ok .tag{background:var(--ok)}.ng .tag{background:var(--ng)}
+@media (max-width:640px){.q{flex-direction:column}.qi,.qi img{width:100%;flex:none}}
+</style></head><body><main>
+<h1>Jev 1.14 vs GPT-6 Luna (OpenAI Decisions API) · 50문제 직접 비교</h1>
+<p>잔재미코딩 영상에서 쓴 테스트 문제와 실제 실행 결과입니다. 2026년 10월 16일, 두 모델에 같은 이미지와 같은 질문을 한 문제씩 보냈습니다. <a href="https://www.youtube.com/@fun-coding">잔재미코딩 유튜브</a></p>
+<h2>결과 요약</h2>
+<table><tr><th></th><th>Jev 1.14</th><th>GPT-6 Luna</th></tr><tr><th>영어 이미지</th><td>10/10</td><td>10/10</td></tr><tr><th>한국어 이미지</th><td>10/10</td><td>10/10</td></tr><tr><th>영어 글</th><td>9/10</td><td>10/10</td></tr><tr><th>한국어 글</th><td>9/10</td><td>9/10</td></tr><tr><th>사이트 SEO (fun-coding.org)</th><td>10/10</td><td>10/10</td></tr><tr><th>합계</th><td><b>48/50</b></td><td><b>49/50</b></td></tr><tr><th>한 문제 시간 (중앙값)</th><td>0.27초</td><td>0.37초</td></tr>
+<tr><th>입력 토큰 합계</th><td>94,306</td><td>41,664</td></tr><tr><th>50문제 비용 (입력 단가 기준)</th><td>$0.0040</td><td>$0.0042</td></tr></table>
+<p>두 모델이 함께 틀린 문제는 <code>ko_text_02</code>(한국어 반어법 리뷰), Jev만 틀린 문제는 <code>en_text_07</code>(멀쩡한 코드를 버그로 판단)입니다.
+단가는 Jev 100만 토큰당 $0.042, GPT-6 Luna $0.10입니다.</p>
+<h2>내려받기</h2>
+<div class="dl"><a href="long058_jev114_vs_gpt6luna_test.zip">전체 묶음 (zip)</a><a href="questions.json">questions.json</a><a href="results.json">results.json</a><a href="run_compare.py">run_compare.py</a><a href="README.txt">README.txt</a></div>
+<p>직접 돌려 보려면 <code>TYPESAFE_API_KEY</code>와 <code>OPENAI_API_KEY</code>를 환경 변수로 두고 <code>python3 run_compare.py --items questions.json</code>을 실행합니다.
+Jev 이미지 기능은 미리보기라 요청 머리글 <code>TypeSafe-Danger-Zone-Images: true</code>가 필요합니다. 요청 형식이나 결과는 바뀔 수 있습니다.</p>
+<h2>알아 둘 점</h2>
+<ul><li>50문제로 규모가 작습니다. 메뉴판·오류 창·영수증·작은 글씨 쿠폰 이미지는 정답을 확실히 알 수 있도록 직접 만들었습니다.</li>
+<li>Jev는 이미지를 가로세로 1,568픽셀까지만 받아 세로로 긴 썸네일은 줄여서 넣었습니다.</li>
+<li>사이트 SEO 문제는 2026년 10월 16일의 fun-coding.org 메인 페이지 캡처와 HTML입니다. 여기서 찾은 대체 텍스트 문제는 그 뒤에 고쳤습니다.</li></ul>
+<h2>문제와 답</h2>
+<p><a href="#en_image">영어 이미지</a> · <a href="#ko_image">한국어 이미지</a> · <a href="#en_text">영어 글</a> · <a href="#ko_text">한국어 글</a> · <a href="#fc_seo">사이트 SEO (fun-coding.org)</a></p>
+<h3 id="en_image">영어 이미지</h3><div class="q"><div class="qi"><a href="images/en_menu.jpg"><img src="images/en_menu.jpg" alt="en_image_01 문제 이미지" loading="lazy"></a></div><div class="qb"><div class="id">en_image_01</div><div class="qt">Does the menu list Chicken Burger at $8.40?</div><div class="tr">정답: <b>예</b></div><div class="a ok"><b>Jev 1.14</b> 예 <span class="p">(예일 확률 1.00)</span> <span class="tag">맞음</span></div><div class="a ok"><b>GPT-6 Luna</b> 예 <span class="p">(예일 확률 1.00)</span> <span class="tag">맞음</span></div></div></div><div class="q"><div class="qi"><a href="images/en_menu.jpg"><img src="images/en_menu.jpg" alt="en_image_02 문제 이미지" loading="lazy"></a></div><div class="qb"><div class="id">en_image_02</div><div class="qt">Does the menu list French Fries at $3.70?</div><div class="tr">정답: <b>아니요</b></div><div class="a ok"><b>Jev 1.14</b> 아니요 <span class="p">(예일 확률 0.01)</span> <span class="tag">맞음</span></div><div class="a ok"><b>GPT-6 Luna</b> 아니요 <span class="p">(예일 확률 0.00)</span> <span class="tag">맞음</span></div></div></div><div class="q"><div class="qi"><a href="images/en_err_1.jpg"><img src="images/en_err_1.jpg" alt="en_image_03 문제 이미지" loading="lazy"></a></div><div class="qb"><div class="id">en_image_03</div><div class="qt">What kind of problem does this error dialog show?</div><ul class=ch><li><code>permission</code> File or folder permission problem</li><li><code>network</code> Network, connection or timeout problem</li><li><code>syntax</code> Code syntax error</li><li><code>memory</code> Out of memory</li></ul><div class="tr">정답: <b>permission</b></div><div class="a ok"><b>Jev 1.14</b> permission <span class="p">(1.00)</span> <span class="tag">맞음</span></div><div class="a ok"><b>GPT-6 Luna</b> permission <span class="p">(1.00)</span> <span class="tag">맞음</span></div></div></div><div class="q"><div class="qi"><a href="images/en_err_2.jpg"><img src="images/en_err_2.jpg" alt="en_image_04 문제 이미지" loading="lazy"></a></div><div class="qb"><div class="id">en_image_04</div><div class="qt">What kind of problem does this error dialog show?</div><ul class=ch><li><code>permission</code> File or folder permission problem</li><li><code>network</code> Network, connection or timeout problem</li><li><code>syntax</code> Code syntax error</li><li><code>memory</code> Out of memory</li></ul><div class="tr">정답: <b>network</b></div><div class="a ok"><b>Jev 1.14</b> network <span class="p">(1.00)</span> <span class="tag">맞음</span></div><div class="a ok"><b>GPT-6 Luna</b> network <span class="p">(1.00)</span> <span class="tag">맞음</span></div></div></div><div class="q"><div class="qi"><a href="images/en_err_3.jpg"><img src="images/en_err_3.jpg" alt="en_image_05 문제 이미지" loading="lazy"></a></div><div class="qb"><div class="id">en_image_05</div><div class="qt">What kind of problem does this error dialog show?</div><ul class=ch><li><code>permission</code> File or folder permission problem</li><li><code>network</code> Network, connection or timeout problem</li><li><code>syntax</code> Code syntax error</li><li><code>memory</code> Out of memory</li></ul><div class="tr">정답: <b>syntax</b></div><div class="a ok"><b>Jev 1.14</b> syntax <span class="p">(1.00)</span> <span class="tag">맞음</span></div><div class="a ok"><b>GPT-6 Luna</b> syntax <span class="p">(1.00)</span> <span class="tag">맞음</span></div></div></div><div class="q"><div class="qi"><a href="images/en_err_4.jpg"><img src="images/en_err_4.jpg" alt="en_image_06 문제 이미지" loading="lazy"></a></div><div class="qb"><div class="id">en_image_06</div><div class="qt">What kind of problem does this error dialog show?</div><ul class=ch><li><code>permission</code> File or folder permission problem</li><li><code>network</code> Network, connection or timeout problem</li><li><code>syntax</code> Code syntax error</li><li><code>memory</code> Out of memory</li></ul><div class="tr">정답: <b>memory</b></div><div class="a ok"><b>Jev 1.14</b> memory <span class="p">(1.00)</span> <span class="tag">맞음</span></div><div class="a ok"><b>GPT-6 Luna</b> memory <span class="p">(1.00)</span> <span class="tag">맞음</span></div></div></div><div class="q"><div class="qi"><a href="images/en_receipt.jpg"><img src="images/en_receipt.jpg" alt="en_image_07 문제 이미지" loading="lazy"></a></div><div class="qb"><div class="id">en_image_07</div><div class="qt">Is the receipt total 88,300 KRW?</div><div class="tr">정답: <b>예</b></div><div class="a ok"><b>Jev 1.14</b> 예 <span class="p">(예일 확률 0.88)</span> <span class="tag">맞음</span></div><div class="a ok"><b>GPT-6 Luna</b> 예 <span class="p">(예일 확률 1.00)</span> <span class="tag">맞음</span></div></div></div><div class="q"><div class="qi"><a href="images/en_receipt.jpg"><img src="images/en_receipt.jpg" alt="en_image_08 문제 이미지" loading="lazy"></a></div><div class="qb"><div class="id">en_image_08</div><div class="qt">Is the receipt total 88,600 KRW?</div><div class="tr">정답: <b>아니요</b></div><div class="a ok"><b>Jev 1.14</b> 아니요 <span class="p">(예일 확률 0.02)</span> <span class="tag">맞음</span></div><div class="a ok"><b>GPT-6 Luna</b> 아니요 <span class="p">(예일 확률 0.00)</span> <span class="tag">맞음</span></div></div></div><div class="q"><div class="qi"><a href="images/en_fine.jpg"><img src="images/en_fine.jpg" alt="en_image_09 문제 이미지" loading="lazy"></a></div><div class="qb"><div class="id">en_image_09</div><div class="qt">Is the coupon code in the small print exactly &#x27;FUN2O26&#x27; (with the letter O)?</div><div class="tr">정답: <b>아니요</b></div><div class="a ok"><b>Jev 1.14</b> 아니요 <span class="p">(예일 확률 0.20)</span> <span class="tag">맞음</span></div><div class="a ok"><b>GPT-6 Luna</b> 아니요 <span class="p">(예일 확률 0.00)</span> <span class="tag">맞음</span></div></div></div><div class="q"><div class="qi"><a href="images/en_thumb_laya.jpg"><img src="images/en_thumb_laya.jpg" alt="en_image_10 문제 이미지" loading="lazy"></a></div><div class="qb"><div class="id">en_image_10</div><div class="qt">Is the large name in the center of this image &#x27;Laya&#x27;?</div><div class="tr">정답: <b>예</b></div><div class="a ok"><b>Jev 1.14</b> 예 <span class="p">(예일 확률 0.96)</span> <span class="tag">맞음</span></div><div class="a ok"><b>GPT-6 Luna</b> 예 <span class="p">(예일 확률 1.00)</span> <span class="tag">맞음</span></div></div></div><h3 id="ko_image">한국어 이미지</h3><div class="q"><div class="qi"><a href="images/ko_menu.jpg"><img src="images/ko_menu.jpg" alt="ko_image_01 문제 이미지" loading="lazy"></a></div><div class="qb"><div class="id">ko_image_01</div><div class="qt">메뉴판에서 된장찌개 가격이 8,500원인가요?</div><div class="tr">정답: <b>예</b></div><div class="a ok"><b>Jev 1.14</b> 예 <span class="p">(예일 확률 0.99)</span> <span class="tag">맞음</span></div><div class="a ok"><b>GPT-6 Luna</b> 예 <span class="p">(예일 확률 1.00)</span> <span class="tag">맞음</span></div></div></div><div class="q"><div class="qi"><a href="images/ko_menu.jpg"><img src="images/ko_menu.jpg" alt="ko_image_02 문제 이미지" loading="lazy"></a></div><div class="qb"><div class="id">ko_image_02</div><div class="qt">메뉴판에서 제육볶음 가격이 11,500원인가요?</div><div class="tr">정답: <b>아니요</b></div><div class="a ok"><b>Jev 1.14</b> 아니요 <span class="p">(예일 확률 0.01)</span> <span class="tag">맞음</span></div><div class="a ok"><b>GPT-6 Luna</b> 아니요 <span class="p">(예일 확률 0.00)</span> <span class="tag">맞음</span></div></div></div><div class="q"><div class="qi"><a href="images/ko_err_1.jpg"><img src="images/ko_err_1.jpg" alt="ko_image_03 문제 이미지" loading="lazy"></a></div><div class="qb"><div class="id">ko_image_03</div><div class="qt">이 오류 창은 어떤 종류의 문제인가요?</div><ul class=ch><li><code>permission</code> 파일·폴더 권한 문제</li><li><code>network</code> 네트워크·연결·시간 초과 문제</li><li><code>syntax</code> 코드 문법 오류</li><li><code>memory</code> 메모리 부족</li></ul><div class="tr">정답: <b>permission</b></div><div class="a ok"><b>Jev 1.14</b> permission <span class="p">(1.00)</span> <span class="tag">맞음</span></div><div class="a ok"><b>GPT-6 Luna</b> permission <span class="p">(1.00)</span> <span class="tag">맞음</span></div></div></div><div class="q"><div class="qi"><a href="images/ko_err_2.jpg"><img src="images/ko_err_2.jpg" alt="ko_image_04 문제 이미지" loading="lazy"></a></div><div class="qb"><div class="id">ko_image_04</div><div class="qt">이 오류 창은 어떤 종류의 문제인가요?</div><ul class=ch><li><code>permission</code> 파일·폴더 권한 문제</li><li><code>network</code> 네트워크·연결·시간 초과 문제</li><li><code>syntax</code> 코드 문법 오류</li><li><code>memory</code> 메모리 부족</li></ul><div class="tr">정답: <b>network</b></div><div class="a ok"><b>Jev 1.14</b> network <span class="p">(1.00)</span> <span class="tag">맞음</span></div><div class="a ok"><b>GPT-6 Luna</b> network <span class="p">(1.00)</span> <span class="tag">맞음</span></div></div></div><div class="q"><div class="qi"><a href="images/ko_err_3.jpg"><img src="images/ko_err_3.jpg" alt="ko_image_05 문제 이미지" loading="lazy"></a></div><div class="qb"><div class="id">ko_image_05</div><div class="qt">이 오류 창은 어떤 종류의 문제인가요?</div><ul class=ch><li><code>permission</code> 파일·폴더 권한 문제</li><li><code>network</code> 네트워크·연결·시간 초과 문제</li><li><code>syntax</code> 코드 문법 오류</li><li><code>memory</code> 메모리 부족</li></ul><div class="tr">정답: <b>syntax</b></div><div class="a ok"><b>Jev 1.14</b> syntax <span class="p">(1.00)</span> <span class="tag">맞음</span></div><div class="a ok"><b>GPT-6 Luna</b> syntax <span class="p">(1.00)</span> <span class="tag">맞음</span></div></div></div><div class="q"><div class="qi"><a href="images/ko_err_4.jpg"><img src="images/ko_err_4.jpg" alt="ko_image_06 문제 이미지" loading="lazy"></a></div><div class="qb"><div class="id">ko_image_06</div><div class="qt">이 오류 창은 어떤 종류의 문제인가요?</div><ul class=ch><li><code>permission</code> 파일·폴더 권한 문제</li><li><code>network</code> 네트워크·연결·시간 초과 문제</li><li><code>syntax</code> 코드 문법 오류</li><li><code>memory</code> 메모리 부족</li></ul><div class="tr">정답: <b>memory</b></div><div class="a ok"><b>Jev 1.14</b> memory <span class="p">(1.00)</span> <span class="tag">맞음</span></div><div class="a ok"><b>GPT-6 Luna</b> memory <span class="p">(1.00)</span> <span class="tag">맞음</span></div></div></div><div class="q"><div class="qi"><a href="images/ko_receipt.jpg"><img src="images/ko_receipt.jpg" alt="ko_image_07 문제 이미지" loading="lazy"></a></div><div class="qb"><div class="id">ko_image_07</div><div class="qt">영수증 합계가 82,300원인가요?</div><div class="tr">정답: <b>예</b></div><div class="a ok"><b>Jev 1.14</b> 예 <span class="p">(예일 확률 0.68)</span> <span class="tag">맞음</span></div><div class="a ok"><b>GPT-6 Luna</b> 예 <span class="p">(예일 확률 0.99)</span> <span class="tag">맞음</span></div></div></div><div class="q"><div class="qi"><a href="images/ko_receipt.jpg"><img src="images/ko_receipt.jpg" alt="ko_image_08 문제 이미지" loading="lazy"></a></div><div class="qb"><div class="id">ko_image_08</div><div class="qt">영수증 합계가 82,000원인가요?</div><div class="tr">정답: <b>아니요</b></div><div class="a ok"><b>Jev 1.14</b> 아니요 <span class="p">(예일 확률 0.02)</span> <span class="tag">맞음</span></div><div class="a ok"><b>GPT-6 Luna</b> 아니요 <span class="p">(예일 확률 0.00)</span> <span class="tag">맞음</span></div></div></div><div class="q"><div class="qi"><a href="images/ko_fine.jpg"><img src="images/ko_fine.jpg" alt="ko_image_09 문제 이미지" loading="lazy"></a></div><div class="qb"><div class="id">ko_image_09</div><div class="qt">아래 작은 글씨의 쿠폰 코드가 정확히 &#x27;잔재미2025&#x27;인가요?</div><div class="tr">정답: <b>아니요</b></div><div class="a ok"><b>Jev 1.14</b> 아니요 <span class="p">(예일 확률 0.01)</span> <span class="tag">맞음</span></div><div class="a ok"><b>GPT-6 Luna</b> 아니요 <span class="p">(예일 확률 0.00)</span> <span class="tag">맞음</span></div></div></div><div class="q"><div class="qi"><a href="images/ko_thumb_s024.jpg"><img src="images/ko_thumb_s024.jpg" alt="ko_image_10 문제 이미지" loading="lazy"></a></div><div class="qb"><div class="id">ko_image_10</div><div class="qt">이미지 위쪽 문구가 &#x27;신입·주니어 개발자&#x27;로 시작하나요?</div><div class="tr">정답: <b>예</b></div><div class="a ok"><b>Jev 1.14</b> 예 <span class="p">(예일 확률 0.97)</span> <span class="tag">맞음</span></div><div class="a ok"><b>GPT-6 Luna</b> 예 <span class="p">(예일 확률 1.00)</span> <span class="tag">맞음</span></div></div></div><h3 id="en_text">영어 글</h3><div class="q"><div class="qi"></div><div class="qb"><div class="id">en_text_01</div><div class="qt">Is this customer review positive overall (the customer is satisfied)?</div><div class=st>Arrived in two days and the battery lasts all weekend. Would buy again.</div><div class="tr">정답: <b>예</b></div><div class="a ok"><b>Jev 1.14</b> 예 <span class="p">(예일 확률 0.97)</span> <span class="tag">맞음</span></div><div class="a ok"><b>GPT-6 Luna</b> 예 <span class="p">(예일 확률 1.00)</span> <span class="tag">맞음</span></div></div></div><div class="q"><div class="qi"></div><div class="qb"><div class="id">en_text_02</div><div class="qt">Is this customer review positive overall (the customer is satisfied)?</div><div class=st>Oh great, it broke after one day. Exactly what I paid for. Amazing quality.</div><div class="tr">정답: <b>아니요</b></div><div class="a ok"><b>Jev 1.14</b> 아니요 <span class="p">(예일 확률 0.03)</span> <span class="tag">맞음</span></div><div class="a ok"><b>GPT-6 Luna</b> 아니요 <span class="p">(예일 확률 0.00)</span> <span class="tag">맞음</span></div></div></div><div class="q"><div class="qi"></div><div class="qb"><div class="id">en_text_03</div><div class="qt">Is this customer review positive overall (the customer is satisfied)?</div><div class=st>Not bad at all — honestly better than the expensive one I returned.</div><div class="tr">정답: <b>예</b></div><div class="a ok"><b>Jev 1.14</b> 예 <span class="p">(예일 확률 0.95)</span> <span class="tag">맞음</span></div><div class="a ok"><b>GPT-6 Luna</b> 예 <span class="p">(예일 확률 0.96)</span> <span class="tag">맞음</span></div></div></div><div class="q"><div class="qi"></div><div class="qb"><div class="id">en_text_04</div><div class="qt">Is this message spam or a phishing attempt?</div><div class=st>Congratulations! You won a $500 gift card. Click http://bit.ly/claim-now to claim within 24h.</div><div class="tr">정답: <b>예</b></div><div class="a ok"><b>Jev 1.14</b> 예 <span class="p">(예일 확률 0.98)</span> <span class="tag">맞음</span></div><div class="a ok"><b>GPT-6 Luna</b> 예 <span class="p">(예일 확률 0.99)</span> <span class="tag">맞음</span></div></div></div><div class="q"><div class="qi"></div><div class="qb"><div class="id">en_text_05</div><div class="qt">Is this message spam or a phishing attempt?</div><div class=st>Hi Dave, the invoice for September is attached. Let me know if the numbers look right.</div><div class="tr">정답: <b>아니요</b></div><div class="a ok"><b>Jev 1.14</b> 아니요 <span class="p">(예일 확률 0.05)</span> <span class="tag">맞음</span></div><div class="a ok"><b>GPT-6 Luna</b> 아니요 <span class="p">(예일 확률 0.12)</span> <span class="tag">맞음</span></div></div></div><div class="q"><div class="qi"></div><div class="qb"><div class="id">en_text_06</div><div class="qt">Does this code have a bug that would raise an error or return the wrong element?</div><div class=st>def last_item(xs):
+    # return the last element
+    return xs[len(xs)]</div><div class="tr">정답: <b>예</b></div><div class="a ok"><b>Jev 1.14</b> 예 <span class="p">(예일 확률 0.98)</span> <span class="tag">맞음</span></div><div class="a ok"><b>GPT-6 Luna</b> 예 <span class="p">(예일 확률 1.00)</span> <span class="tag">맞음</span></div></div></div><div class="q"><div class="qi"></div><div class="qb"><div class="id">en_text_07</div><div class="qt">Does this code have a bug that would raise an error or return the wrong element?</div><div class=st>def last_item(xs):
+    # return the last element
+    return xs[-1]</div><div class="tr">정답: <b>아니요</b></div><div class="a ng"><b>Jev 1.14</b> 예 <span class="p">(예일 확률 0.64)</span> <span class="tag">틀림</span></div><div class="a ok"><b>GPT-6 Luna</b> 아니요 <span class="p">(예일 확률 0.00)</span> <span class="tag">맞음</span></div></div></div><div class="q"><div class="qi"></div><div class="qb"><div class="id">en_text_08</div><div class="qt">Which team should handle this customer message?</div><ul class=ch><li><code>billing</code> Payments, invoices, refunds</li><li><code>technical</code> Problems using the product or app</li><li><code>shipping</code> Delivery and tracking</li></ul><div class=st>I was charged twice for my October subscription, please refund one.</div><div class="tr">정답: <b>billing</b></div><div class="a ok"><b>Jev 1.14</b> billing <span class="p">(1.00)</span> <span class="tag">맞음</span></div><div class="a ok"><b>GPT-6 Luna</b> billing <span class="p">(1.00)</span> <span class="tag">맞음</span></div></div></div><div class="q"><div class="qi"></div><div class="qb"><div class="id">en_text_09</div><div class="qt">Which team should handle this customer message?</div><ul class=ch><li><code>billing</code> Payments, invoices, refunds</li><li><code>technical</code> Problems using the product or app</li><li><code>shipping</code> Delivery and tracking</li></ul><div class=st>The app crashes every time I open the settings page on iOS.</div><div class="tr">정답: <b>technical</b></div><div class="a ok"><b>Jev 1.14</b> technical <span class="p">(1.00)</span> <span class="tag">맞음</span></div><div class="a ok"><b>GPT-6 Luna</b> technical <span class="p">(1.00)</span> <span class="tag">맞음</span></div></div></div><div class="q"><div class="qi"></div><div class="qb"><div class="id">en_text_10</div><div class="qt">Which team should handle this customer message?</div><ul class=ch><li><code>billing</code> Payments, invoices, refunds</li><li><code>technical</code> Problems using the product or app</li><li><code>shipping</code> Delivery and tracking</li></ul><div class=st>My package says delivered but nothing arrived at my door.</div><div class="tr">정답: <b>shipping</b></div><div class="a ok"><b>Jev 1.14</b> shipping <span class="p">(1.00)</span> <span class="tag">맞음</span></div><div class="a ok"><b>GPT-6 Luna</b> shipping <span class="p">(1.00)</span> <span class="tag">맞음</span></div></div></div><h3 id="ko_text">한국어 글</h3><div class="q"><div class="qi"></div><div class="qb"><div class="id">ko_text_01</div><div class="qt">이 리뷰를 쓴 고객은 전체적으로 만족했나요?</div><div class=st>이틀 만에 왔고 배터리도 주말 내내 가요. 또 살 생각 있습니다.</div><div class="tr">정답: <b>예</b></div><div class="a ok"><b>Jev 1.14</b> 예 <span class="p">(예일 확률 0.86)</span> <span class="tag">맞음</span></div><div class="a ok"><b>GPT-6 Luna</b> 예 <span class="p">(예일 확률 0.95)</span> <span class="tag">맞음</span></div></div></div><div class="q"><div class="qi"></div><div class="qb"><div class="id">ko_text_02</div><div class="qt">이 리뷰를 쓴 고객은 전체적으로 만족했나요?</div><div class=st>와 배송 진짜 빠르네요. 주문하고 2주 만에 왔어요. 최고입니다 정말.</div><div class="tr">정답: <b>아니요</b></div><div class="a ng"><b>Jev 1.14</b> 예 <span class="p">(예일 확률 0.94)</span> <span class="tag">틀림</span></div><div class="a ng"><b>GPT-6 Luna</b> 예 <span class="p">(예일 확률 1.00)</span> <span class="tag">틀림</span></div></div></div><div class="q"><div class="qi"></div><div class="qb"><div class="id">ko_text_03</div><div class="qt">이 리뷰를 쓴 고객은 전체적으로 만족했나요?</div><div class=st>기대 안 했는데 생각보다 괜찮네요. 반품한 비싼 제품보다 나아요.</div><div class="tr">정답: <b>예</b></div><div class="a ok"><b>Jev 1.14</b> 예 <span class="p">(예일 확률 0.85)</span> <span class="tag">맞음</span></div><div class="a ok"><b>GPT-6 Luna</b> 예 <span class="p">(예일 확률 0.95)</span> <span class="tag">맞음</span></div></div></div><div class="q"><div class="qi"></div><div class="qb"><div class="id">ko_text_04</div><div class="qt">이 문자는 스팸이나 피싱인가요?</div><div class=st>[국제발신] 고객님 택배 주소 불일치로 반송 예정. 주소 수정: http://bit.ly/kr-post</div><div class="tr">정답: <b>예</b></div><div class="a ok"><b>Jev 1.14</b> 예 <span class="p">(예일 확률 0.94)</span> <span class="tag">맞음</span></div><div class="a ok"><b>GPT-6 Luna</b> 예 <span class="p">(예일 확률 0.99)</span> <span class="tag">맞음</span></div></div></div><div class="q"><div class="qi"></div><div class="qb"><div class="id">ko_text_05</div><div class="qt">이 문자는 스팸이나 피싱인가요?</div><div class=st>대표님, 9월 세금계산서 첨부드립니다. 금액 확인 부탁드립니다.</div><div class="tr">정답: <b>아니요</b></div><div class="a ok"><b>Jev 1.14</b> 아니요 <span class="p">(예일 확률 0.06)</span> <span class="tag">맞음</span></div><div class="a ok"><b>GPT-6 Luna</b> 아니요 <span class="p">(예일 확률 0.10)</span> <span class="tag">맞음</span></div></div></div><div class="q"><div class="qi"></div><div class="qb"><div class="id">ko_text_06</div><div class="qt">이 댓글은 상대를 깎아내리는 악성 댓글인가요? (정중한 지적은 해당 없음)</div><div class=st>영상 잘 봤습니다. 다만 3분쯤 설명은 조금 빨라서 다시 봤어요.</div><div class="tr">정답: <b>아니요</b></div><div class="a ok"><b>Jev 1.14</b> 아니요 <span class="p">(예일 확률 0.04)</span> <span class="tag">맞음</span></div><div class="a ok"><b>GPT-6 Luna</b> 아니요 <span class="p">(예일 확률 0.02)</span> <span class="tag">맞음</span></div></div></div><div class="q"><div class="qi"></div><div class="qb"><div class="id">ko_text_07</div><div class="qt">이 댓글은 상대를 깎아내리는 악성 댓글인가요? (정중한 지적은 해당 없음)</div><div class=st>이딴 걸 강의라고 올리냐 수준 진짜 한심하다</div><div class="tr">정답: <b>예</b></div><div class="a ok"><b>Jev 1.14</b> 예 <span class="p">(예일 확률 0.89)</span> <span class="tag">맞음</span></div><div class="a ok"><b>GPT-6 Luna</b> 예 <span class="p">(예일 확률 0.95)</span> <span class="tag">맞음</span></div></div></div><div class="q"><div class="qi"></div><div class="qb"><div class="id">ko_text_08</div><div class="qt">이 문의는 어느 팀이 처리해야 하나요?</div><ul class=ch><li><code>billing</code> 결제·환불·영수증</li><li><code>technical</code> 앱·서비스 사용 중 문제</li><li><code>shipping</code> 배송·택배 조회</li></ul><div class=st>10월 구독료가 두 번 결제됐어요. 하나 환불해 주세요.</div><div class="tr">정답: <b>billing</b></div><div class="a ok"><b>Jev 1.14</b> billing <span class="p">(1.00)</span> <span class="tag">맞음</span></div><div class="a ok"><b>GPT-6 Luna</b> billing <span class="p">(1.00)</span> <span class="tag">맞음</span></div></div></div><div class="q"><div class="qi"></div><div class="qb"><div class="id">ko_text_09</div><div class="qt">이 문의는 어느 팀이 처리해야 하나요?</div><ul class=ch><li><code>billing</code> 결제·환불·영수증</li><li><code>technical</code> 앱·서비스 사용 중 문제</li><li><code>shipping</code> 배송·택배 조회</li></ul><div class=st>아이폰에서 설정 화면만 들어가면 앱이 꺼집니다.</div><div class="tr">정답: <b>technical</b></div><div class="a ok"><b>Jev 1.14</b> technical <span class="p">(1.00)</span> <span class="tag">맞음</span></div><div class="a ok"><b>GPT-6 Luna</b> technical <span class="p">(1.00)</span> <span class="tag">맞음</span></div></div></div><div class="q"><div class="qi"></div><div class="qb"><div class="id">ko_text_10</div><div class="qt">이 문의는 어느 팀이 처리해야 하나요?</div><ul class=ch><li><code>billing</code> 결제·환불·영수증</li><li><code>technical</code> 앱·서비스 사용 중 문제</li><li><code>shipping</code> 배송·택배 조회</li></ul><div class=st>배송 완료로 나오는데 집 앞에 아무것도 없어요.</div><div class="tr">정답: <b>shipping</b></div><div class="a ok"><b>Jev 1.14</b> shipping <span class="p">(1.00)</span> <span class="tag">맞음</span></div><div class="a ok"><b>GPT-6 Luna</b> shipping <span class="p">(1.00)</span> <span class="tag">맞음</span></div></div></div><h3 id="fc_seo">사이트 SEO (fun-coding.org)</h3><div class="q"><div class="qi"><a href="images/fc_first_screen.jpg"><img src="images/fc_first_screen.jpg" alt="fc_seo_01 문제 이미지" loading="lazy"></a></div><div class="qb"><div class="id">fc_seo_01</div><div class="qt">이 웹페이지 첫 화면에 사이트가 무엇을 하는 곳인지 알려 주는 큰 제목이 보이나요?</div><div class="tr">정답: <b>예</b></div><div class="a ok"><b>Jev 1.14</b> 예 <span class="p">(예일 확률 0.95)</span> <span class="tag">맞음</span></div><div class="a ok"><b>GPT-6 Luna</b> 예 <span class="p">(예일 확률 0.95)</span> <span class="tag">맞음</span></div></div></div><div class="q"><div class="qi"><a href="images/fc_first_screen.jpg"><img src="images/fc_first_screen.jpg" alt="fc_seo_02 문제 이미지" loading="lazy"></a></div><div class="qb"><div class="id">fc_seo_02</div><div class="qt">첫 화면에 회원가입이나 가입을 하라는 버튼이 보이나요?</div><div class="tr">정답: <b>예</b></div><div class="a ok"><b>Jev 1.14</b> 예 <span class="p">(예일 확률 0.98)</span> <span class="tag">맞음</span></div><div class="a ok"><b>GPT-6 Luna</b> 예 <span class="p">(예일 확률 1.00)</span> <span class="tag">맞음</span></div></div></div><div class="q"><div class="qi"><a href="images/fc_first_screen.jpg"><img src="images/fc_first_screen.jpg" alt="fc_seo_03 문제 이미지" loading="lazy"></a></div><div class="qb"><div class="id">fc_seo_03</div><div class="qt">첫 화면에 강의 가격(원)이 보이나요?</div><div class="tr">정답: <b>아니요</b></div><div class="a ok"><b>Jev 1.14</b> 아니요 <span class="p">(예일 확률 0.06)</span> <span class="tag">맞음</span></div><div class="a ok"><b>GPT-6 Luna</b> 아니요 <span class="p">(예일 확률 0.00)</span> <span class="tag">맞음</span></div></div></div><div class="q"><div class="qi"><a href="images/fc_first_screen.jpg"><img src="images/fc_first_screen.jpg" alt="fc_seo_04 문제 이미지" loading="lazy"></a></div><div class="qb"><div class="id">fc_seo_04</div><div class="qt">첫 화면에 수강생이 쓴 후기 문장이 보이나요?</div><div class="tr">정답: <b>아니요</b></div><div class="a ok"><b>Jev 1.14</b> 아니요 <span class="p">(예일 확률 0.06)</span> <span class="tag">맞음</span></div><div class="a ok"><b>GPT-6 Luna</b> 아니요 <span class="p">(예일 확률 0.00)</span> <span class="tag">맞음</span></div></div></div><div class="q"><div class="qi"><a href="images/fc_first_screen.jpg"><img src="images/fc_first_screen.jpg" alt="fc_seo_05 문제 이미지" loading="lazy"></a></div><div class="qb"><div class="id">fc_seo_05</div><div class="qt">화면 왼쪽 위 로고에 &#x27;잔재미코딩&#x27;이라는 글자가 있나요?</div><div class="tr">정답: <b>예</b></div><div class="a ok"><b>Jev 1.14</b> 예 <span class="p">(예일 확률 0.96)</span> <span class="tag">맞음</span></div><div class="a ok"><b>GPT-6 Luna</b> 예 <span class="p">(예일 확률 1.00)</span> <span class="tag">맞음</span></div></div></div><div class="q"><div class="qi"></div><div class="qb"><div class="id">fc_seo_06</div><div class="qt">title 태그가 60자 이내이고 사이트 이름과 무엇을 하는 사이트인지를 함께 담고 있나요?</div><details><summary>함께 넣은 글 (1,793자)</summary><div class=st>&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;잔재미코딩 - 10년간 10만명이 검증한 IT 강의&lt;/title&gt;
+    &lt;meta name=&quot;description&quot; content=&quot;AI 바이브코딩, 풀스택 웹·앱 개발, 데이터 분석까지. 10년간 10만명이 검증한 체계적 로드맵으로 가장 빠르게 성장하세요. 입문부터 실전 프로젝트까지 잔재미코딩에서 시작하세요.&quot;&gt;
+    &lt;meta name=&quot;keywords&quot; content=&quot;잔재미코딩, AI 강의, 바이브코딩, 풀스택, 데이터분석, Claude Code, 파이썬, 웹개발, 앱개발, IT 교육&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;meta name=&quot;robots&quot; content=&quot;index, follow&quot;&gt;
+    &lt;meta name=&quot;author&quot; content=&quot;Dave Lee&quot;&gt;
+    &lt;meta http-equiv=&quot;content-language&quot; content=&quot;ko-KR&quot;&gt;
+    &lt;meta property=&quot;og:title&quot; content=&quot;잔재미코딩 - 10년간 10만명이 검증한 IT 강의&quot;&gt;
+    &lt;meta property=&quot;og:description&quot; content=&quot;AI 바이브코딩, 풀스택, 데이터 분석까지. 체계적 로드맵으로 가장 빠르게 성장하세요. 10만명이 선택한 잔재미코딩.&quot;&gt;
+    &lt;meta property=&quot;og:image&quot; content=&quot;https://www.fun-coding.org/img/funcoding2026logo-og.png&quot;&gt;
+    &lt;meta property=&quot;og:url&quot; content=&quot;https://www.fun-coding.org&quot;&gt;
+    &lt;meta property=&quot;og:type&quot; content=&quot;website&quot;&gt;
+    &lt;meta property=&quot;og:site_name&quot; content=&quot;잔재미코딩&quot;&gt;
+    &lt;meta name=&quot;twitter:card&quot; content=&quot;summary_large_image&quot;&gt;
+    &lt;meta name=&quot;twitter:title&quot; content=&quot;잔재미코딩 - 10년간 10만명이 검증한 IT 강의&quot;&gt;
+    &lt;meta name=&quot;twitter:description&quot; content=&quot;AI 바이브코딩, 풀스택, 데이터 분석까지. 체계적 로드맵으로 가장 빠르게 성장하세요.&quot;&gt;
+    &lt;meta name=&quot;twitter:image&quot; content=&quot;https://www.fun-coding.org/img/funcoding2026logo-og.png&quot;&gt;
+    &lt;link rel=&quot;canonical&quot; href=&quot;https://www.fun-coding.org&quot;&gt;
+    &lt;link rel=&quot;icon&quot; href=&quot;img/funcodingnewlogo128128.png?v=2.0&quot;&gt;
+    &lt;link rel=&quot;apple-touch-icon&quot; href=&quot;img/funcodingnewlogo128128.png?v=2.0&quot;&gt;
+    &lt;!-- Google Tag Manager --&gt;
+    &lt;link rel=&quot;preconnect&quot; href=&quot;https://fonts.googleapis.com&quot;&gt;
+    &lt;link rel=&quot;preconnect&quot; href=&quot;https://fonts.gstatic.com&quot; crossorigin&gt;
+    &lt;!-- Sample-only styles: the original homepage and shared assets are unchanged. --&gt;
+&lt;/head&gt;</div></details><div class="tr">정답: <b>예</b></div><div class="a ok"><b>Jev 1.14</b> 예 <span class="p">(예일 확률 0.86)</span> <span class="tag">맞음</span></div><div class="a ok"><b>GPT-6 Luna</b> 예 <span class="p">(예일 확률 0.99)</span> <span class="tag">맞음</span></div></div></div><div class="q"><div class="qi"></div><div class="qb"><div class="id">fc_seo_07</div><div class="qt">meta description이 없거나 160자를 넘나요?</div><details><summary>함께 넣은 글 (1,793자)</summary><div class=st>&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;잔재미코딩 - 10년간 10만명이 검증한 IT 강의&lt;/title&gt;
+    &lt;meta name=&quot;description&quot; content=&quot;AI 바이브코딩, 풀스택 웹·앱 개발, 데이터 분석까지. 10년간 10만명이 검증한 체계적 로드맵으로 가장 빠르게 성장하세요. 입문부터 실전 프로젝트까지 잔재미코딩에서 시작하세요.&quot;&gt;
+    &lt;meta name=&quot;keywords&quot; content=&quot;잔재미코딩, AI 강의, 바이브코딩, 풀스택, 데이터분석, Claude Code, 파이썬, 웹개발, 앱개발, IT 교육&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;meta name=&quot;robots&quot; content=&quot;index, follow&quot;&gt;
+    &lt;meta name=&quot;author&quot; content=&quot;Dave Lee&quot;&gt;
+    &lt;meta http-equiv=&quot;content-language&quot; content=&quot;ko-KR&quot;&gt;
+    &lt;meta property=&quot;og:title&quot; content=&quot;잔재미코딩 - 10년간 10만명이 검증한 IT 강의&quot;&gt;
+    &lt;meta property=&quot;og:description&quot; content=&quot;AI 바이브코딩, 풀스택, 데이터 분석까지. 체계적 로드맵으로 가장 빠르게 성장하세요. 10만명이 선택한 잔재미코딩.&quot;&gt;
+    &lt;meta property=&quot;og:image&quot; content=&quot;https://www.fun-coding.org/img/funcoding2026logo-og.png&quot;&gt;
+    &lt;meta property=&quot;og:url&quot; content=&quot;https://www.fun-coding.org&quot;&gt;
+    &lt;meta property=&quot;og:type&quot; content=&quot;website&quot;&gt;
+    &lt;meta property=&quot;og:site_name&quot; content=&quot;잔재미코딩&quot;&gt;
+    &lt;meta name=&quot;twitter:card&quot; content=&quot;summary_large_image&quot;&gt;
+    &lt;meta name=&quot;twitter:title&quot; content=&quot;잔재미코딩 - 10년간 10만명이 검증한 IT 강의&quot;&gt;
+    &lt;meta name=&quot;twitter:description&quot; content=&quot;AI 바이브코딩, 풀스택, 데이터 분석까지. 체계적 로드맵으로 가장 빠르게 성장하세요.&quot;&gt;
+    &lt;meta name=&quot;twitter:image&quot; content=&quot;https://www.fun-coding.org/img/funcoding2026logo-og.png&quot;&gt;
+    &lt;link rel=&quot;canonical&quot; href=&quot;https://www.fun-coding.org&quot;&gt;
+    &lt;link rel=&quot;icon&quot; href=&quot;img/funcodingnewlogo128128.png?v=2.0&quot;&gt;
+    &lt;link rel=&quot;apple-touch-icon&quot; href=&quot;img/funcodingnewlogo128128.png?v=2.0&quot;&gt;
+    &lt;!-- Google Tag Manager --&gt;
+    &lt;link rel=&quot;preconnect&quot; href=&quot;https://fonts.googleapis.com&quot;&gt;
+    &lt;link rel=&quot;preconnect&quot; href=&quot;https://fonts.gstatic.com&quot; crossorigin&gt;
+    &lt;!-- Sample-only styles: the original homepage and shared assets are unchanged. --&gt;
+&lt;/head&gt;</div></details><div class="tr">정답: <b>아니요</b></div><div class="a ok"><b>Jev 1.14</b> 아니요 <span class="p">(예일 확률 0.36)</span> <span class="tag">맞음</span></div><div class="a ok"><b>GPT-6 Luna</b> 아니요 <span class="p">(예일 확률 0.00)</span> <span class="tag">맞음</span></div></div></div><div class="q"><div class="qi"></div><div class="qb"><div class="id">fc_seo_08</div><div class="qt">title과 og:title이 서로 다른가요?</div><details><summary>함께 넣은 글 (1,793자)</summary><div class=st>&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;잔재미코딩 - 10년간 10만명이 검증한 IT 강의&lt;/title&gt;
+    &lt;meta name=&quot;description&quot; content=&quot;AI 바이브코딩, 풀스택 웹·앱 개발, 데이터 분석까지. 10년간 10만명이 검증한 체계적 로드맵으로 가장 빠르게 성장하세요. 입문부터 실전 프로젝트까지 잔재미코딩에서 시작하세요.&quot;&gt;
+    &lt;meta name=&quot;keywords&quot; content=&quot;잔재미코딩, AI 강의, 바이브코딩, 풀스택, 데이터분석, Claude Code, 파이썬, 웹개발, 앱개발, IT 교육&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;meta name=&quot;robots&quot; content=&quot;index, follow&quot;&gt;
+    &lt;meta name=&quot;author&quot; content=&quot;Dave Lee&quot;&gt;
+    &lt;meta http-equiv=&quot;content-language&quot; content=&quot;ko-KR&quot;&gt;
+    &lt;meta property=&quot;og:title&quot; content=&quot;잔재미코딩 - 10년간 10만명이 검증한 IT 강의&quot;&gt;
+    &lt;meta property=&quot;og:description&quot; content=&quot;AI 바이브코딩, 풀스택, 데이터 분석까지. 체계적 로드맵으로 가장 빠르게 성장하세요. 10만명이 선택한 잔재미코딩.&quot;&gt;
+    &lt;meta property=&quot;og:image&quot; content=&quot;https://www.fun-coding.org/img/funcoding2026logo-og.png&quot;&gt;
+    &lt;meta property=&quot;og:url&quot; content=&quot;https://www.fun-coding.org&quot;&gt;
+    &lt;meta property=&quot;og:type&quot; content=&quot;website&quot;&gt;
+    &lt;meta property=&quot;og:site_name&quot; content=&quot;잔재미코딩&quot;&gt;
+    &lt;meta name=&quot;twitter:card&quot; content=&quot;summary_large_image&quot;&gt;
+    &lt;meta name=&quot;twitter:title&quot; content=&quot;잔재미코딩 - 10년간 10만명이 검증한 IT 강의&quot;&gt;
+    &lt;meta name=&quot;twitter:description&quot; content=&quot;AI 바이브코딩, 풀스택, 데이터 분석까지. 체계적 로드맵으로 가장 빠르게 성장하세요.&quot;&gt;
+    &lt;meta name=&quot;twitter:image&quot; content=&quot;https://www.fun-coding.org/img/funcoding2026logo-og.png&quot;&gt;
+    &lt;link rel=&quot;canonical&quot; href=&quot;https://www.fun-coding.org&quot;&gt;
+    &lt;link rel=&quot;icon&quot; href=&quot;img/funcodingnewlogo128128.png?v=2.0&quot;&gt;
+    &lt;link rel=&quot;apple-touch-icon&quot; href=&quot;img/funcodingnewlogo128128.png?v=2.0&quot;&gt;
+    &lt;!-- Google Tag Manager --&gt;
+    &lt;link rel=&quot;preconnect&quot; href=&quot;https://fonts.googleapis.com&quot;&gt;
+    &lt;link rel=&quot;preconnect&quot; href=&quot;https://fonts.gstatic.com&quot; crossorigin&gt;
+    &lt;!-- Sample-only styles: the original homepage and shared assets are unchanged. --&gt;
+&lt;/head&gt;</div></details><div class="tr">정답: <b>아니요</b></div><div class="a ok"><b>Jev 1.14</b> 아니요 <span class="p">(예일 확률 0.03)</span> <span class="tag">맞음</span></div><div class="a ok"><b>GPT-6 Luna</b> 아니요 <span class="p">(예일 확률 0.00)</span> <span class="tag">맞음</span></div></div></div><div class="q"><div class="qi"></div><div class="qb"><div class="id">fc_seo_09</div><div class="qt">이 페이지에 h1 제목이 정확히 하나만 있나요?</div><details><summary>함께 넣은 글 (450자)</summary><div class=st>&lt;h1&gt; AI × IT 슈퍼 역량으로취업·수익화까지
+&lt;h2&gt; AI 활용부터 IT 전문가까지 목표별 순서까지 정해진 체계적 로드맵 여기밖에 없습니다
+&lt;h2&gt; 최강 AI 활용 + 풀스택 + 데이터 풀로드맵 (2026)
+&lt;h2&gt; 무료 강의/자료
+&lt;h2&gt; 최강 AI 활용 로드맵
+&lt;h2&gt; 가장 빠른 웹, 앱 개발 로드맵
+&lt;h2&gt; 가장 빠른 데이터 분석/과학 로드맵
+&lt;h2&gt; 컴퓨터공학(CS) 로드맵
+&lt;h2&gt; 로드맵 대신, 원하는 강의만 골라 나만의 묶음 할인을 만들어 보세요
+&lt;h2&gt; 왜 10만명이잔재미코딩을 선택할까요?
+&lt;h2&gt; 압도적인 실제 수강평을 확인하세요
+&lt;h2&gt; 점점 많은 분들이 수강하시는안정적인 교육 서비스입니다
+&lt;h2&gt; 회원가입하시면
+&lt;h2&gt; 주요 블로그 글
+&lt;h2&gt; 풀스택 과정 학습 후수익화 및 1인 비즈니스를고려하신다면
+&lt;h2&gt; 완전 IT 초입문자라면?
+&lt;h2&gt; 로드맵 학습 후 실전 멘토링</div></details><div class="tr">정답: <b>예</b></div><div class="a ok"><b>Jev 1.14</b> 예 <span class="p">(예일 확률 0.95)</span> <span class="tag">맞음</span></div><div class="a ok"><b>GPT-6 Luna</b> 예 <span class="p">(예일 확률 0.70)</span> <span class="tag">맞음</span></div></div></div><div class="q"><div class="qi"></div><div class="qb"><div class="id">fc_seo_10</div><div class="qt">이 이미지 태그들 가운데 alt(대체 텍스트)가 없거나 비어 있는 것이 절반을 넘나요?</div><details><summary>함께 넣은 글 (13,927자)</summary><div class=st>&lt;img src=&quot;https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/6bf4f2fb9312fd4ce435657c93b62707.png&quot; alt=&quot;잔재미코딩&quot;&gt;
+&lt;img class=&quot;fc-rm-thumb&quot; src=&quot;/course/imgs/ultra-ai-dev-data-full-set.gif&quot; alt=&quot;&quot; loading=&quot;lazy&quot;&gt;
+&lt;img class=&quot;fc-rm-thumb&quot; src=&quot;/course/imgs/super-ai-core-set.gif&quot; alt=&quot;&quot; loading=&quot;lazy&quot;&gt;
+&lt;img class=&quot;fc-rm-thumb&quot; src=&quot;https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/76f3df76acbd70e6d99c7b8f1a1440d5.gif&quot; alt=&quot;&quot; loading=&quot;lazy&quot;&gt;
+&lt;img class=&quot;fc-rm-thumb&quot; src=&quot;https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/185a5e010478595c1b87413e98a031a4.gif&quot; alt=&quot;&quot; loading=&quot;lazy&quot;&gt;
+&lt;img class=&quot;fc-rm-thumb&quot; src=&quot;https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/47f79da439f49766a32c59c41af87572.png&quot; alt=&quot;&quot; loading=&quot;lazy&quot;&gt;
+&lt;img class=&quot;fc-rm-thumb&quot; src=&quot;https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/4d6bae90f9977f80d2d77bcf1e10eba4.png&quot; alt=&quot;&quot; loading=&quot;lazy&quot;&gt;
+&lt;img class=&quot;fc-rm-thumb&quot; src=&quot;https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/4a61acde67ab4c09d117fb3f0353c78f.png&quot; alt=&quot;&quot; loading=&quot;lazy&quot;&gt;
+&lt;img class=&quot;fc-rm-thumb&quot; src=&quot;https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/70ddd133a2a919ca327b1c2150ae5bf9.png&quot; alt=&quot;&quot; loading=&quot;lazy&quot;&gt;
+&lt;img src=&quot;https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/35f714da079d7cb96fffa613d1d50ddc.png&quot; alt=&quot;&quot; loading=&quot;lazy&quot;&gt;
+&lt;img src=&quot;https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/a93c18f0d5038c7f3383657e0cd350af.jpg&quot; alt=&quot;&quot; loading=&quot;lazy&quot;&gt;
+&lt;img src=&quot;https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/e38ac1c574a8e133bf939bca3c7f0f62.png&quot; alt=&quot;&quot; loading=&quot;lazy&quot;&gt;
+&lt;img src=&quot;https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/ff3f262fdf63c544d1da50e45146e293.png&quot; alt=&quot;&quot; loading=&quot;lazy&quot;&gt;
+&lt;img src=&quot;https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/81302d0f08bae32bbb73d7cded233658.jpg&quot; alt=&quot;&quot; loading=&quot;lazy&quot;&gt;
+&lt;img src=&quot;https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/5a95502a18abe28adf0bae7a7e67200d.png&quot; alt=&quot;&quot; loading=&quot;lazy&quot;&gt;
+&lt;img src=&quot;https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/e38ac1c574a8e133bf939bca3c7f0f62.png&quot; alt=&quot;&quot; loading=&quot;lazy&quot;&gt;
+&lt;img src=&quot;https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/270840b777c5a4654427328a7d44e392.png&quot; alt=&quot;&quot; loading=&quot;lazy&quot;&gt;
+&lt;img src=&quot;https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/ff3f262fdf63c544d1da50e45146e293.png&quot; alt=&quot;&quot; loading=&quot;lazy&quot;&gt;
+&lt;img src=&quot;https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/35f714da079d7cb96fffa613d1d50ddc.png&quot; alt=&quot;&quot; loading=&quot;lazy&quot;&gt;
+&lt;img src=&quot;https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/e12de90c139ed45e372a53027bbcba56.png&quot; alt=&quot;&quot; loading=&quot;lazy&quot;&gt;
+&lt;img src=&quot;https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/0534100c323bc0e9e879b2c7848aca23.png&quot; alt=&quot;&quot; loading=&quot;lazy&quot;&gt;
+&lt;img src=&quot;https://www.fun-coding.org/course/imgs/cc-series/cc-claudecode-automation.gif&quot; alt=&quot;&quot; loading=&quot;lazy&quot;&gt;
+&lt;img src=&quot;https://www.fun-coding.org/course/imgs/cc-series/cc-vibecoding-basic.gif&quot; alt=&quot;&quot; loading=&quot;lazy&quot;&gt;
+&lt;img src=&quot;https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/29294c8529ad5193417588097a8e84e6.png&quot; alt=&quot;&quot; loading=&quot;lazy&quot;&gt;
+&lt;img src=&quot;https://www.fun-coding.org/course/imgs/cc-series/cc-aiagent-advanced.gif&quot; alt=&quot;&quot; loading=&quot;lazy&quot;&gt;
+&lt;img src=&quot;https://www.fun-coding.org/course/imgs/cc-series/cc-datawithai.gif&quot; alt=&quot;&quot; loading=&quot;lazy&quot;&gt;
+&lt;img src=&quot;https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/4eafbfb68cf7787029ea7a4ce6205e68.png&quot; alt=&quot;&quot; loading=&quot;lazy&quot;&gt;
+&lt;img src=&quot;https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/8040c9e4a83b2dcc67908f41bf4996dd.png&quot; alt=&quot;&quot; loading=&quot;lazy&quot;&gt;
+&lt;img
+                                            src=&quot;https://www.fun-coding.org/course/imgs/claudebasic_final.png&quot;
+                                            alt=&quot;&quot; class=&quot;fc-card-img&quot;&gt;
+&lt;img
+                                            src=&quot;https://www.fun-coding.org/course/imgs/claudecodexwebapp.png&quot;
+                                            alt=&quot;&quot; class=&quot;fc-card-img&quot;&gt;
+&lt;img
+                                            src=&quot;/course/imgs/cc-series/free-book-ai-cli.gif&quot;
+                                            alt=&quot;클로드 코드·코덱스 CLI·제미나이 CLI 완전 활용법 무료 강의&quot; class=&quot;fc-card-img&quot;&gt;
+&lt;img
+                                            src=&quot;https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/3f92c43fdea71906ac294e5f970bf70b.jpg&quot;
+                                            alt=&quot;&quot; class=&quot;fc-card-img&quot;&gt;
+&lt;img
+                                            src=&quot;/course/imgs/cc-series/free-book-python-data.gif&quot;
+                                            alt=&quot;잔재미코딩의 파이썬 데이터 분석 입문 무료 강의&quot; class=&quot;fc-card-img&quot;&gt;
+&lt;img class=&quot;fc-roadmap-feature-img&quot; src=&quot;/course/imgs/super-ai-core-set.gif&quot; alt=&quot;&quot; loading=&quot;lazy&quot;&gt;
+&lt;img
+                                            src=&quot;https://www.fun-coding.org/course/imgs/cc-series/cc-claudecode-automation.gif&quot;
+                                            alt=&quot;&quot; class=&quot;fc-card-img&quot;&gt;
+&lt;img
+                                            src=&quot;https://www.fun-coding.org/course/imgs/cc-series/cc-vibecoding-basic.gif&quot;
+                                            alt=&quot;&quot; class=&quot;fc-card-img&quot;&gt;
+&lt;img
+                                            src=&quot;https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/29294c8529ad5193417588097a8e84e6.png&quot;
+                                            alt=&quot;&quot; class=&quot;fc-card-img&quot;&gt;
+&lt;img
+                                            src=&quot;https://www.fun-coding.org/course/imgs/cc-series/cc-aiagent-advanced.gif&quot;
+                                            alt=&quot;클로드코드 고급 기법과 나만의 AI 에이전트 개발 강의&quot;
+                                            class=&quot;fc-card-img&quot; loading=&quot;lazy&quot;&gt;
+&lt;img
+                                            src=&quot;https://www.fun-coding.org/course/imgs/cc-series/cc-datawithai.gif&quot;
+                                            alt=&quot;&quot; class=&quot;fc-card-img&quot;&gt;
+&lt;img
+                                            src=&quot;https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/4eafbfb68cf7787029ea7a4ce6205e68.png&quot;
+                                            alt=&quot;&quot; class=&quot;fc-card-img&quot;&gt;
+&lt;img
+                                            src=&quot;https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/8040c9e4a83b2dcc67908f41bf4996dd.png&quot;
+                                            alt=&quot;&quot; class=&quot;fc-card-img&quot;&gt;
+&lt;img class=&quot;fc-roadmap-feature-img&quot; src=&quot;https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/47f79da439f49766a32c59c41af87572.png&quot; alt=&quot;&quot; loading=&quot;lazy&quot;&gt;
+&lt;img
+                                            src=&quot;https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/e38ac1c574a8e133bf939bca3c7f0f62.png&quot;
+                                            alt=&quot;&quot; class=&quot;fc-card-img&quot;&gt;
+&lt;img
+                                            src=&quot;https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/ff3f262fdf63c544d1da50e45146e293.png&quot;
+                                            alt=&quot;&quot; class=&quot;fc-card-img&quot;&gt;
+&lt;img
+                                            src=&quot;https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/35f714da079d7cb96fffa613d1d50ddc.png&quot;
+                                            alt=&quot;&quot; class=&quot;fc-card-img&quot;&gt;
+&lt;img
+                                            src=&quot;https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/a93c18f0d5038c7f3383657e0cd350af.jpg&quot;
+                                            alt=&quot;&quot; class=&quot;fc-card-img&quot;&gt;
+&lt;img
+                                            src=&quot;/course/imgs/fastapistart.png&quot;
+                                            alt=&quot;&quot; class=&quot;fc-card-img&quot;&gt;
+&lt;img
+                                            src=&quot;https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/81302d0f08bae32bbb73d7cded233658.jpg&quot;
+                                            alt=&quot;&quot; class=&quot;fc-card-img&quot;&gt;
+&lt;img
+                                            src=&quot;https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/5a95502a18abe28adf0bae7a7e67200d.png&quot;
+                                            alt=&quot;&quot; class=&quot;fc-card-img&quot;&gt;
+&lt;img
+                                            src=&quot;https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/7e914de8b7730a14a51409ff64fd1ecd.png&quot;
+                                            alt=&quot;&quot; class=&quot;fc-card-img&quot;&gt;
+&lt;img class=&quot;fc-roadmap-feature-img&quot; src=&quot;https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/4d6bae90f9977f80d2d77bcf1e10eba4.png&quot; alt=&quot;&quot; loading=&quot;lazy&quot;&gt;
+&lt;img
+                                            src=&quot;https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/e38ac1c574a8e133bf939bca3c7f0f62.png&quot;
+                                            alt=&quot;&quot; class=&quot;fc-card-img&quot;&gt;
+&lt;img
+                                            src=&quot;https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/270840b777c5a4654427328a7d44e392.png&quot;
+                                            alt=&quot;&quot; class=&quot;fc-card-img&quot;&gt;
+&lt;img
+                                            src=&quot;https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/ff3f262fdf63c544d1da50e45146e293.png&quot;
+                                            alt=&quot;&quot; class=&quot;fc-card-img&quot;&gt;
+&lt;img
+                                            src=&quot;https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/176d77334872def2af86889a02c2b948.jpg&quot;
+                                            alt=&quot;&quot; class=&quot;fc-card-img&quot;&gt;
+&lt;img
+                                            src=&quot;https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/35f714da079d7cb96fffa613d1d50ddc.png&quot;
+                                            alt=&quot;&quot; class=&quot;fc-card-img&quot;&gt;
+&lt;img
+                                            src=&quot;https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/e12de90c139ed45e372a53027bbcba56.png&quot;
+                                            alt=&quot;&quot; class=&quot;fc-card-img&quot;&gt;
+&lt;img
+                                            src=&quot;https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/0534100c323bc0e9e879b2c7848aca23.png&quot;
+                                            alt=&quot;&quot; class=&quot;fc-card-img&quot;&gt;
+&lt;img
+                                            src=&quot;https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/a7d6cd776e0951707a3a9a84fa243af3.png&quot;
+                                            alt=&quot;&quot; class=&quot;fc-card-img&quot;&gt;
+&lt;img class=&quot;fc-roadmap-feature-img&quot; src=&quot;https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/4a61acde67ab4c09d117fb3f0353c78f.png&quot; alt=&quot;&quot; loading=&quot;lazy&quot;&gt;
+&lt;img class=&quot;fc-roadmap-feature-img&quot; src=&quot;https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/70ddd133a2a919ca327b1c2150ae5bf9.png&quot; alt=&quot;&quot; loading=&quot;lazy&quot;&gt;
+&lt;img
+                                            src=&quot;https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/e5c23a3f2ac2284b5752f19e518223ec.png&quot;
+                                            alt=&quot;&quot; class=&quot;fc-card-img&quot;&gt;
+&lt;img
+                                            src=&quot;https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/836a9ccf73d270498e603487aa4af098.png&quot;
+                                            alt=&quot;&quot; class=&quot;fc-card-img&quot;&gt;
+&lt;img
+                                            src=&quot;https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/801d7125c31b60125544eaba9fc481f8.png&quot;
+                                            alt=&quot;&quot; class=&quot;fc-card-img&quot;&gt;
+&lt;img
+                                            src=&quot;https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/c2c2e714572bf442589a75f15f8cdabb.png&quot;
+                                            alt=&quot;&quot; class=&quot;fc-card-img&quot;&gt;
+&lt;img src=&quot;/img/b2b/multicampus.png&quot; alt=&quot;멀티캠퍼스&quot; loading=&quot;lazy&quot;&gt;
+&lt;img src=&quot;/img/b2b/ubob.png&quot; alt=&quot;유밥&quot; loading=&quot;lazy&quot;&gt;
+&lt;img src=&quot;/img/b2b/nexon.svg&quot; alt=&quot;넥슨&quot; loading=&quot;lazy&quot;&gt;
+&lt;img src=&quot;/img/b2b/samsung.svg&quot; alt=&quot;삼성전자&quot; loading=&quot;lazy&quot;&gt;
+&lt;img src=&quot;/img/b2b/samsungsds.svg&quot; alt=&quot;삼성SDS&quot; loading=&quot;lazy&quot;&gt;
+&lt;img src=&quot;/img/b2b/samsungsdi.svg&quot; alt=&quot;삼성SDI&quot; loading=&quot;lazy&quot;&gt;
+&lt;img src=&quot;/img/b2b/hyundai-ngv.png&quot; alt=&quot;현대엔지비&quot; loading=&quot;lazy&quot;&gt;
+&lt;img src=&quot;/img/b2b/kacnet.png&quot; alt=&quot;고려아카데미컨설팅&quot; loading=&quot;lazy&quot;&gt;
+&lt;img src=&quot;/img/b2b/multicampus.png&quot; alt=&quot;&quot; loading=&quot;lazy&quot;&gt;
+&lt;img src=&quot;/img/b2b/ubob.png&quot; alt=&quot;&quot; loading=&quot;lazy&quot;&gt;
+&lt;img src=&quot;/img/b2b/nexon.svg&quot; alt=&quot;&quot; loading=&quot;lazy&quot;&gt;
+&lt;img src=&quot;/img/b2b/samsung.svg&quot; alt=&quot;&quot; loading=&quot;lazy&quot;&gt;
+&lt;img src=&quot;/img/b2b/samsungsds.svg&quot; alt=&quot;&quot; loading=&quot;lazy&quot;&gt;
+&lt;img src=&quot;/img/b2b/samsungsdi.svg&quot; alt=&quot;&quot; loading=&quot;lazy&quot;&gt;
+&lt;img src=&quot;/img/b2b/hyundai-ngv.png&quot; alt=&quot;&quot; loading=&quot;lazy&quot;&gt;
+&lt;img src=&quot;/img/b2b/kacnet.png&quot; alt=&quot;&quot; loading=&quot;lazy&quot;&gt;
+&lt;img src=&quot;/img/b2b/multicampus.png&quot; alt=&quot;&quot; loading=&quot;lazy&quot;&gt;
+&lt;img src=&quot;/img/b2b/ubob.png&quot; alt=&quot;&quot; loading=&quot;lazy&quot;&gt;
+&lt;img src=&quot;/img/b2b/nexon.svg&quot; alt=&quot;&quot; loading=&quot;lazy&quot;&gt;
+&lt;img src=&quot;/img/b2b/samsung.svg&quot; alt=&quot;&quot; loading=&quot;lazy&quot;&gt;
+&lt;img src=&quot;/img/b2b/samsungsds.svg&quot; alt=&quot;&quot; loading=&quot;lazy&quot;&gt;
+&lt;img src=&quot;/img/b2b/samsungsdi.svg&quot; alt=&quot;&quot; loading=&quot;lazy&quot;&gt;
+&lt;img src=&quot;/img/b2b/hyundai-ngv.png&quot; alt=&quot;&quot; loading=&quot;lazy&quot;&gt;
+&lt;img src=&quot;/img/b2b/kacnet.png&quot; alt=&quot;&quot; loading=&quot;lazy&quot;&gt;
+&lt;img src=&quot;https://www.fun-coding.org/img/chart_growth_wide_202602_960x540.png&quot; alt=&quot;수강생 성장 추이&quot;
+                    style=&quot;width: 100%; max-width: 720px; border-radius: 12px; border: 1px solid #E8E8E8;&quot;&gt;
+&lt;img src=&quot;img/coloso_1in_roadmap.png&quot;
+                             alt=&quot;기획부터 개발, 실행까지 — 1인 개발 프로세스 풀 로드맵 (Programmer. Fun Coding × Coloso)&quot;
+                             loading=&quot;lazy&quot; width=&quot;1280&quot; height=&quot;720&quot;&gt;
+&lt;img src=&quot;https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/0c8f978eca280c4f2645404018c9d5c5.png&quot;
+                                alt=&quot;&quot;&gt;
+&lt;img src=&quot;https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/5070eb98858a286d7b21917a3f4235e5.png&quot;
+                                alt=&quot;&quot;&gt;
+&lt;img
+                                            src=&quot;https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/c41e5bffb3b69c8a59e88da1127a8dbc.jpg&quot;
+                                            alt=&quot;&quot; class=&quot;fc-card-img&quot;&gt;
+&lt;img
+                                            src=&quot;https://lwfiles.mycourse.app/665e737408bed6ee79e2986c-public/72c2ddb89405a6f3fbaa236d71eafd82.jpg&quot;
+                                            alt=&quot;&quot; class=&quot;fc-card-img&quot;&gt;</div></details><div class="tr">정답: <b>예</b></div><div class="a ok"><b>Jev 1.14</b> 예 <span class="p">(예일 확률 0.84)</span> <span class="tag">맞음</span></div><div class="a ok"><b>GPT-6 Luna</b> 예 <span class="p">(예일 확률 0.99)</span> <span class="tag">맞음</span></div></div></div>
+</main></body></html>
